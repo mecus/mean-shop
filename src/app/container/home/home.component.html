@@ -11,3 +11,9 @@
     The .progress-bar also requires some role and aria attributes to make it accessible.Put that all together, and you have the following examples.
     </p>
 </div>
+<ul>
+    <li *ngFor="let product of products">
+        <p>{{product.name}}</p>
+        <p>{{product._id}}</p>
+    </li>
+</ul>

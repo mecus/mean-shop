@@ -1,0 +1,124 @@
+extends layout
+block content
+	.container
+		- if (messages.successMessage)
+			.alert.alert-success(role='alert')
+				span= messages.successMessage 
+		- if (messages.errorMessage)
+			.alert.alert-danger(role='alert')
+				strong Oh snap! 
+					span= messages.errorMessage
+		- if (messages.deleteMessage)
+			.alert.alert-warning(role='alert')
+				strong Oh no! 
+					span= messages.deleteMessage
+
+		.row
+			.col-8
+				.w3-card-4-9.deptForm(id="deptForm" style="margin: 0px auto;")
+					h6 Department
+					form.jumbotron(action="/admin/dept", method="POST")
+						.closeForm
+							span.badge.badge-default.badge-pill
+								i.fa.fa-times(aria-hidden='true' onclick="closeDeptForm()" id="true")
+										
+						.form-input.form-group
+							input.form-control(name='name', required='', type='text', placeholder='Department Name')
+							input.form-control(name='code', type='text', placeholder='Department Code')
+						.save-btn
+							button.btn.btn-primary(type='submit') Save
+
+				div
+					table.table.table-striped
+						thead.thead-default
+							tr
+								th Department
+								th Store Code
+								th 
+								th(colSpan="2")
+								th
+									span.badge.badge-default.badge-pill
+										i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
+										
+									
+								
+						tbody
+							each dept in output.dept
+								tr
+									td= dept.name
+									td= dept.code
+									td
+										span.badge.badge-default.badge-pill
+											a(href="/admin/product/new/"+dept.id, id="product", data-id=dept.id) Add Product
+											//- i.fa.fa-plus(aria-hidden='true')
+									td
+										span.badge.badge-default.badge-pill
+											a(href="/admin/dept/"+dept.id id="show-cat") Show
+									td
+										span.badge.badge-default.badge-pill() Edit
+									
+									td
+										span.badge.badge-default.badge-pill
+											a(href="" onclick="deleteDepartment(this)" data-id=dept.id)
+												i.fa.fa-times(aria-hidden='true')
+			.col-4
+				- if(queryId)
+					.w3-card-4-9
+						h6 Categories
+						form.jumbotron(action="/admin/cat", method="POST")
+							.form-input.form-group
+								input.form-control(name ='name', required='', type='text', placeholder='Category')
+								input.form-control(value=queryId hidden="" name ='department_id', required='', type='text', placeholder='dept_id')
+							.save-btn
+								button.btn.btn-primary(type='submit')  Save
+					div
+						ul.list-group
+							each cat in category
+								li.list-group-item.justify-content-between 
+									= cat.name
+									span.badge.badge-default.badge-pill
+										a(href="" onclick="deleteCategory(this)" data-id=cat.id)
+											i.fa.fa-times(aria-hidden='true') 
+
+						//- table.table.table-striped
+						//- 	thead
+						//- 		tr
+						//- 			th
+						//- 			th 
+						//- 	tbody
+						//- 		each cat in category
+						//- 			tr()
+						//- 				td= cat.name
+						//- 				td()
+						//- 					a(href="" onclick="deleteCategory(this)" data-id=cat.id)
+						//- 						i.fa.fa-times(aria-hidden='true')
+
+			//- .col-6
+			//- 	.w3-card-4-9
+			//- 		h4 #{title}
+			//- 		form.jumbotron(action="/admin/cat", method="POST")
+			//- 			.form-input.form-group
+			//- 				input.form-control(name ='name', required='', type='text', placeholder='Category')
+			//- 				select.form-control(name ='department', id="department")
+			//- 					each dpt in output.dept
+			//- 						option(value=dpt.name)
+			//- 							= dpt.name
+			//- 			.save-btn
+			//- 				button.btn.btn-primary(type='submit')  Save
+			//- 	div
+			//- 		table.table.table-striped
+			//- 			thead.thead-inverse
+			//- 				tr
+			//- 					th Category
+			//- 					th
+			//- 					th Department
+			//- 					th 
+			//- 			tbody
+			//- 				each cat in output.cat
+			//- 					tr()
+			//- 						td= cat.name
+			//- 						td Belongs to >>
+			//- 						td= cat.department
+			//- 						td()
+			//- 							a(href="" onclick="deleteCategory(this)" data-id=cat.id) delete
+

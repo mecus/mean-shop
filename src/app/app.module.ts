@@ -7,6 +7,7 @@ import { MaterialModule } from './utility/material-design.module';
 import { ProductModule } from "./container/products/product.module";
 
 import { MainRouterModule } from './routers/main-router';
+import { AdminModule } from './admin/admin.module';
 
 
 import { AppComponent }  from './app.component';
@@ -14,15 +15,18 @@ import { HomeComponent } from './container/home/home.component';
 import { TopMenuComponent } from './container/menu/top-menu/top-menu.component';
 import { SubMenuComponent } from './container/menu/top-menu/sub-menu';
 
+import { ProductService } from './services/product.service';
 
 
 @NgModule({
   imports: [ 
     BrowserModule, FormsModule, ReactiveFormsModule,
-    HttpModule, MainRouterModule, MaterialModule, ProductModule
+    HttpModule, MainRouterModule, MaterialModule, ProductModule,
+    AdminModule
 
   ],
   declarations: [ AppComponent, HomeComponent, TopMenuComponent, SubMenuComponent ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [ProductService]
 })
 export class AppModule { }

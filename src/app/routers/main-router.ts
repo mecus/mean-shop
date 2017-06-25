@@ -5,7 +5,9 @@ import { RouterModule, Route } from '@angular/router';
 
 import { HomeComponent } from '../container/home/home.component';
 import * as products from '../container/products/index';
- 
+import * as tax from "../admin/taxanomy/index";
+import { NewProductComponent } from "../admin/new-product/new-product.component";
+
 
 const root:Route = {
   path: '',
@@ -14,14 +16,16 @@ const root:Route = {
 const routes = [
   { path: 'home', component: HomeComponent },
   { path: 'products', component: products.ProductComponent },
-  { path: 'products/?', component: products.CategoryDisplayComponent }
+  { path: 'products/?', component: products.CategoryDisplayComponent },
+  { path: 'tax', component: tax.TaxanomyComponent },
+  { path: 'products/new', component: NewProductComponent } 
  
 ]
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, {useHash:true})
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
   declarations: []

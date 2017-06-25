@@ -6,8 +6,12 @@ var productSchema = new Schema({
     code: String,
     price: String,
     imageUrl: String,
-    category: String,
+    category: {
+        type: Array
+    },
     catCode: String,
+    stock: Number,
+    department: String,
     description: {
         detail: String,
         size: String,
@@ -18,7 +22,8 @@ var productSchema = new Schema({
         fat: String,
         saturates: String,
         salt: String
-    }
+    },
+    publish: String
 })
 var Product;
 module.exports = Product = mongoose.model('Product', productSchema); 

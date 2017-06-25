@@ -7,34 +7,74 @@ import * as firebase from 'firebase';
 @Injectable()
 
 export class TaxanomyService {
+    category = [
+    {
+      "category" : "Dry Food",
+      "name" : "Rice"
+    },
+    {
+      "category" : "Dry Food",
+      "name" : "Fish"
+    },
+    {
+      "category" : "Dry Food",
+      "name" : "Gary"
+    },
+    {
+      "category" : "Frozen Food",
+      "name" : "Prowns"
+    },
+    {
+      "category" : "Frozen Food",
+      "name" : "Peas"
+    },
+    {
+      "category" : "Frozen Food",
+      "name" : "Crunchy"
+    }
+        ];
+    department = [
+    {"code" : "5069874", "name" : "Frozen Food"},
+    {"code" : "5069874", "name" : "Baverages"},
+    {"code" : "5069874", "name" : "Drinks"},
+    {"code" : "5069874", "name" : "Ingredients"},
+    {
+      "code" : "7890576",
+      "name" : "Health and Beauty"
+    },
+    {
+      "code" : "5069874",
+      "name" : "Dry Food"
+    },
+    {
+      "code" : "9086475",
+      "name" : "Bakery"
+    }
+    ]
+    
 
     constructor(){}
 
-    // createCategory(cat){
-    //     return this._AFdb.list('/category')
-    //         .push(cat).then((res)=>console.log(res))
-    //                   .catch((error)=>console.log(error));
+    createCategory(cat){
+        return
 
-    // }
-    // getCategory():Observable<any>{
-    //     return this._AFdb.list('/category');
-    // }
-    // removeCategory($key){
-    //     return this._AFdb.list('/category/'+$key)
-    //         .remove().then(res=> console.log).catch(error=>console.log(error));
-    // }
+    }
+    getCategory(){
+        return this.category
+    }
+    removeCategory($key){
+        console.log($key)
+        return this.category
+    }
 
-    // createDepartment(dept){
-    //     return this._AFdb.list('/department')
-    //         .push(dept).then((res)=>console.log(res))
-    //                   .catch((error)=>console.log(error));
-    // }
-    // getDepartment(){
-    //     return this._AFdb.list('/department');
-    // }
-    // removeDepartment($key){
-    //     return this._AFdb.list('/department/'+$key)
-    //         .remove().then(res=>console.log(res)).catch(error=>console.log(error));
-    // }
+    createDepartment(dept){
+        console.log(dept)
+    }
+    getDepartment(){
+       return this.department;
+    }
+    removeDepartment($key){
+        return this.department;
+    }
 
 }

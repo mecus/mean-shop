@@ -1,7 +1,7 @@
 var express = require ('express');
 var start_app     = require ('./backend-server/app');
 var http    = require ('http');
-require('dotenv').config();
+
 
 // var chokidar = require('chokidar');
 // var watcher = chokidar.watch('./backend-server');
@@ -16,7 +16,10 @@ require('dotenv').config();
 
 var success = function(){
     // console.log(process.env);
-    console.log(`SERVER: Listening on port: ${start_app.get("port")}}...`);
+    console.log(`
+        SERVER: Listening on port: ${start_app.get("port")}}...
+        ENVIRONMENT: ${process.env.NODE_ENV}
+    `);
     return;
 }
 

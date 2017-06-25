@@ -1,0 +1,106 @@
+extends layout
+block content
+	.container(style="width:700px")
+		h6 Editing #{product.name}
+		form.jumbotron(action="/admin/product/update/"+product._id method="POST")
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodName') Name
+				.col-sm-9
+					input#prodName.form-control(name="name", value=product.name, type='text' placeholder='name')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCode') Product Code
+				.col-sm-9
+					input#prodCode.form-control(name="code", value=product.code, type='text', placeholder='product code')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodPrice') Price
+				.col-sm-9
+					input#prodPrice.form-control(name="price", value=product.price, type='text', placeholder='price')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodimageUrl') Image
+				.col-sm-9
+					input#prodimageUrl.form-control(name="imageUrl", value=product.imageUrl, type='text', placeholder='image link')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCategory') Category
+				.col-sm-9
+					
+					//- textarea#prodCategory.form-control(name="category[]", type='text')
+					//- 	each cat in product.category
+					//- 		= cat
+					.row
+						each cat in product.category
+							.col-2(style="color:lightslategey; padding: 5px; margin-left:20px; opacity: 0.2;")
+								= cat
+
+					select.form-control(name="category[]", multiple="")
+						each cat in category
+							option(value=cat.name) #{cat.name}
+					//- input#prodCategory.form-control(name="category", value=product.category, type='text', placeholder='category')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCategoryCode') Category Code
+				.col-sm-9
+					input#prodCategoryCode.form-control(name="catCode", value=product.catCode, type='text', placeholder='category code')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodStock') Stock Qty
+				.col-sm-9
+					input#prodStock.form-control(name="stock", value=product.stock type='number', placeholder='stock')
+
+			.form-group
+				h6(style="color:slategray") Descriptions
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodDetails') Details
+					.col-sm-10
+						textarea#prodDetails.form-control(name="detail", rows="4")
+							= product.description.detail
+				
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodSize') Size
+					.col-sm-10
+						input#prodSize.form-control(name="size", value=product.description.size, type='text', placeholder='size')
+
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodOrigin') Origin
+					.col-sm-10
+						input#prodOrigin.form-control(name="origin", value=product.description.origin, type='text', placeholder='origin')
+
+			.form-group
+				h6(style="color:slategray") Nutrition
+			.form-group.row
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodEnergy') Energy
+						.col-sm-10
+							input#prodEnergy.form-control(name="energy", value=product.nutrition.energy, type='text', placeholder='energy info')
+				
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodFat') Fat
+						.col-sm-10
+							input#prodFat.form-control(name="fat", value=product.nutrition.fat, type='text', placeholder='fat info')
+
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodSaturates') Saturates
+						.col-sm-10
+							input#prodSaturates.form-control(name="saturates", value=product.nutrition.saturates, type='text', placeholder='saturates info')
+
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodSalt') Salt
+						.col-sm-10
+							input#prodSalt.form-control(name="salt", value=product.nutrition.salt, type='text', placeholder='salt info')
+
+			fieldset.form-group.row
+				legend.col-form-legend.col-sm-2 Publishing
+				.col-sm-10
+					.form-check
+						label.form-check-label
+							input#publish1.form-check-input(name="publish", value="true", type='radio', checked='')
+							|             Selecting this option will publish the product
+					.form-check
+						label.form-check-label
+							input#publish2.form-check-input(name="publish", value="false", type='radio')
+							|             Chose this option if you are not ready to display the product
+					
+			.form-group.row
+				.offset-sm-8.col-sm-4
+					button.btn.btn-primary(type='submit') Save product

@@ -95,6 +95,9 @@ gulp.task('copy:Sysjs', function() {
        .src(['src/*.js'])
        .pipe(gulp.dest('public'));
 });
+gulp.task('copy:express-assets', function(){
+    return gulp.src('src/express-assets').pipe(gulp.dest('public'));
+});
 
 //Typescript compiler
 gulp.task('tSCompiler', function () {
@@ -115,7 +118,7 @@ gulp.task('sass:watch', function(){
 
 // Group task
 gulp.task('build', function(done){
-    sequence('copy:app', 'copy:images', 'compress:lib', 'copy:Sysjs', 'copy:htmlfile', 'copy:style', done)
+    sequence('copy:app', 'copy:images', 'compress:lib', 'copy:Sysjs', 'copy:htmlfile', 'copy:style', 'copy:express-assets', done)
 });
 gulp.task('copy:libs', function (done) {
     sequence('copy:vendor', 'copy:rxjs', 'copy:angular', 'copy:firebase', 'copy:socketIO', done);

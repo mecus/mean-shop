@@ -8,7 +8,7 @@
             <md-icon>dialpad</md-icon>
             <span>Products</span>
         </button>
-        <button md-menu-item >
+        <button md-menu-item routerLink="/products/new">
             <md-icon>voicemail</md-icon>
             <span>New Product</span>
         </button>
@@ -16,10 +16,10 @@
             <md-icon>notifications_off</md-icon>
             <span>Basket</span>
         </button>
-        <button md-menu-item>
+        <a type="button" md-menu-item href="/admin/dashboard">
             <md-icon>dialpad</md-icon>
-            <span>Taxanomy</span>
-        </button>
+            <span>Back End</span>
+        </a>
         <button (click)="authenticate()" md-menu-item>
             <md-icon>notifications_off</md-icon>
             <span>Login</span>

@@ -1,0 +1,105 @@
+extends layout
+block content
+	.container(style="width:700px")
+	
+		form.jumbotron(action="/admin/products/submit", method="POST")
+			.form-group.row
+				label.col-sm-3.col-form-label(for='storeDepartment') Store Dept
+				.col-sm-9
+					h5 #{department.name}
+					input#storeDepartment.form-control(name="department", value=department.name, hidden="" type='text')
+			//- .form-group.row
+			//- 	label.col-sm-3.col-form-label(for='imageUp') UpLoad Image
+			//- 	.col-sm-9
+			//- 		input(name="imageUp" onchange="upLoadImage(this)" id="imageUp" type='file')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodName') Name
+				.col-sm-9
+					input#prodName.form-control(name="name", type='text' placeholder='name')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCode') Product Code
+				.col-sm-9
+					input#prodCode.form-control(name="code", type='text', placeholder='product code')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodPrice') Price
+				.col-sm-9
+					input#prodPrice.form-control(name="price", type='text', placeholder='price')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodimageUrl') Image
+				.col-sm-9
+					input#prodimageUrl.form-control(name="imageUrl", type='text', placeholder='image link')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCategory') Category
+				.col-sm-9
+					select.form-control(name="category[]", multiple='')
+						each cat in category
+							option(value=cat.name) #{cat.name}
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodCategoryCode') Category Code
+				.col-sm-9
+					input#prodCategoryCode.form-control(name="catCode", type='text', placeholder='category code')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='prodStock') Stock Qty
+				.col-sm-9
+					input#prodStock.form-control(name="stock", type='number', placeholder='stock')
+			
+			.form-group
+				h6(style="color:slategray") Descriptions
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodDetails') Details
+					.col-sm-10
+						textarea#prodDetails.form-control(name="detail", type='text', rows="4", placeholder='details')
+				
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodSize') Size
+					.col-sm-10
+						input#prodSize.form-control(name="size", type='text', placeholder='size')
+
+				.form-group.row
+					label.col-sm-2.col-form-label(for='prodOrigin') Origin
+					.col-sm-10
+						input#prodOrigin.form-control(name="origin", type='text', placeholder='origin')
+
+			.form-group
+				h6(style="color:slategray") Nutrition
+			.form-group.row
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodEnergy') Energy
+						.col-sm-10
+							input#prodEnergy.form-control(name="energy", type='text', placeholder='energy info')
+				
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodFat') Fat
+						.col-sm-10
+							input#prodFat.form-control(name="fat", type='text', placeholder='fat info')
+
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodSaturates') Saturates
+						.col-sm-10
+							input#prodSaturates.form-control(name="saturates", type='text', placeholder='saturates info')
+
+				.nutrient-group.col-sm-6
+					.row
+						label.col-sm-2.col-form-label(for='prodSalt') Salt
+						.col-sm-10
+							input#prodSalt.form-control(name="salt", type='text', placeholder='salt info')
+
+			fieldset.form-group.row
+				legend.col-form-legend.col-sm-2 Publishing
+				.col-sm-10
+					.form-check
+						label.form-check-label
+							input#publish1.form-check-input(name="publish", value="true", type='radio', checked='')
+							|             Selecting this option will publish the product
+					.form-check
+						label.form-check-label
+							input#publish2.form-check-input(name="publish", value="false", type='radio')
+							|             Chose this option if you are not ready to display the product
+					
+			.form-group.row
+				.offset-sm-8.col-sm-4
+					button.btn.btn-primary(type='submit') Save product
+

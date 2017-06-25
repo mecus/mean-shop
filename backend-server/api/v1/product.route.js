@@ -1,12 +1,10 @@
 const Product = require('../../models/product.model');
 
 getProducts = function(req, res){
-    console.log(process.env.SECRET_KEY);
-    // console.log(req.headers['content-type']);
     if(req.headers['content-type'] !== undefined){
         res.status(415).json({"Error": "Content-Type is require"});
     }else{
-        Product.find({}, function(err, products){
+        Product.find({publish: true}, function(err, products){
             if(err){
                 res.statusCode = 406;
                 res.json({"Error": "Content not available"});

@@ -53,17 +53,17 @@
     <div class="main-content col col-lg-9">
       <div class="row">
         <div class="pd-item col col-xs-6 col-sm-6 col-lg-2" >
-          <div class="example-card product" *ngFor="let product of products">
-            <div [style.min-height.px]="60">
+          <!--<div class="example-card product" *ngFor="let product of products">-->
+            <!--<div [style.min-height.px]="60">
               <img *ngIf="product.imageUrl !== undefined; else load" (click)="viewProduct(product)" md-card-image  [src]="product.imageUrl">
               <template #load>waiting..</template>
-            </div>
+            </div>-->
             
-            <div>
+            <!--<div>
               <p id="size">({{product.description.size}})</p>
               <p id="title">{{product.name}}</p>
               <p id="price">{{product.price | currency: 'GBP': 'true'}}</p>
-            </div>
+            </div>-->
             <!--<md-card-actions>
                   <button (click)="addToCart(product)"  md-raised-button >ADD</button>
             </md-card-actions>-->
@@ -72,7 +72,7 @@
                   <p id="inCart">{{cart.qty}} in cart</p>
                 </div>
             </div>-->
-          </div>
+          <!--</div>-->
         </div>
       </div>
     </div>

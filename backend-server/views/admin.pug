@@ -1,0 +1,18 @@
+extends layout
+block content
+	.w3-container
+		.w3-card-4(style="width: 600px")
+			- if (messages.dbSuccess)
+					.alert.alert-success(role='alert')
+						span= messages.dbSuccess
+		.jumbotron
+			h1.display-3 Hello,
+				- if (user)
+					= user.username
+			p.lead
+				| This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+			hr.my-4
+			p
+				| It uses utility classes for typography and spacing to space content out within the larger container.
+			p.lead
+				a.btn.btn-primary.btn-lg(href='#', role='button') Learn more

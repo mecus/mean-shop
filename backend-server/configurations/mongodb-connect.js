@@ -1,9 +1,9 @@
 
 var dbConnect = function(mongoose){
-    let path = 'mongodb://127.0.0.1:27017/nodeDB';
+    let path = process.env.MONGODB_URL;
     mongoose.connect(path);
     let db = mongoose.connection;
-    db.on('error',function(err){console.log(err)});
+    db.on('error',function(err){console.log(err.message)});
     db.once('open', function() {
         console.log(`
         DATABASE_CONNECTION: TRUE!

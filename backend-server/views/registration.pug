@@ -1,0 +1,34 @@
+extends admin-layout
+block content
+	.w3-container(style="margin-top:50px")
+		.w3-card-6(style="width: 600px; margin:0 auto")
+			- if (messages.error)
+				each err in messages.error
+					.alert.alert-danger(role='alert')
+						span= err.msg
+			- if (messages.dbError)
+					.alert.alert-danger(role='alert')
+						span= messages.dbError
+	
+			.container
+				form.jumbotron(action="/admin/registration/new", method="POST")
+					input(type='hidden', name='_csrf', value=_csrf)
+					.form-group.row
+						label.col-sm-2.col-form-label(for='username') Username
+						.col-sm-10
+							input#username.form-control(name="username", type='text', placeholder='Username')
+					.form-group.row
+						label.col-sm-2.col-form-label(for='email') Email
+						.col-sm-10
+							input#email.form-control(name="email", type='email', placeholder='Email')
+					.form-group.row
+						label.col-sm-2.col-form-label(for='Password') Password
+						.col-sm-10
+							input#password.form-control(name="password", type='password', placeholder='Password')
+					.form-group.row
+						label.col-sm-2.col-form-label(for='passwordConfirmation') Repeat Password
+						.col-sm-10
+							input#passwordConfirmation.form-control(name="passwordConfirmation" type='password', placeholder='Password Confirmation')
+					.form-group.row
+						.offset-sm-2.col-sm-10
+							button.btn.btn-primary(type='submit') Sign up

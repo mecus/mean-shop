@@ -4,11 +4,12 @@
         "src/app/**/*.js": true,
         "src/*.css": true,
         "**/*.js.map": true,
-        
+        "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
-       
+        ".gitignore": true,
+        "**/.DS_Store": true,
         "public": true
     }
 
