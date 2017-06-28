@@ -1,6 +1,6 @@
 
 getOrders = function(req, res){
-    res.render('orders', {title: "This is the order page"});
+    res.render('orders', {title: "Customers order"});
 }
 
 module.exports = {getOrders};

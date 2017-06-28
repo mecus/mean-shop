@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
+require('mongoose-double')(mongoose);
+var SchemaTypes = mongoose.Schema.Types;
 
 var OrderSchema = new mongoose.Schema({
     order_no: {
         type: String
     },
     customer_name: String,
+    customer_id: String,
     delivery_address: {
         flat_no: String,
         address: String,
@@ -12,10 +15,10 @@ var OrderSchema = new mongoose.Schema({
         city: String,
         country: String
     },
-    amount: String,
+    amount: SchemaTypes.Double,
     note: String,
     email: String,
-    telephone: String
+    telephone: Number
 
 }, {timestamps: true})
 

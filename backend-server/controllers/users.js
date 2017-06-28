@@ -95,10 +95,10 @@ const registered = function(req, res, next){
     var errors = req.validationErrors();
     // console.log(errors);
     if(errors){req.flash('error', errors); return res.redirect('/admin/registration');}
-
+    var username = req.body.username.toLowerCase();
     //Creating user instance from the userModel
     var user = new User({
-        username: req.body.username,
+        username: username,
         email: req.body.email,
         password: req.body.password
     });

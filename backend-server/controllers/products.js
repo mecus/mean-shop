@@ -1,39 +1,56 @@
 const Product = require('../models/product.model');
 const Category = require('../models/category.model');
+const SubCategory = require('../models/sub-category.model');
 const Department = require('../models/department.model');
+const Math = require('mathjs');
 
 
 productform = function(req, res, next){
     var queryId = req.params.id;
-    Category.find({department_id:queryId}, function(err, data){
+    SubCategory.findOne({_id:queryId}, function(err, data){
         if(err){
             req.flash('errorMsg', 'Something went wrong!!')
             console.error(err);
             return;
         }
-        Department.findOne({_id:queryId}, function(err, department){
-            if(err){return next(err)}
-            res.render('new-product', {category: data, department});
-        })
-        
+        res.render('new-product', {category: data});
+
     }) 
 }
-showProducts = function(req, res){
+viewProduct = function(req, res, next){
+    var id = req.params.id;
+    Product.findOne({_id:id}, function(err, product){
+        console.log(product);
+        if(err){
+            res.redirect('/admin/products');
+            return next(err); 
+        }else{
+            res.render('view-product', product);
+        }
+    })
+}
+showProducts = function(req, res, next){
     // console.log(req.session.secret);
     Product.find({}).exec(function(err, data){
+        if(err){return next(err);}
         res.render('products', products = data);
         // console.log(process.env.NODE_ENV);
     })
 }
 postProduct = function(req, res, next){
     // console.log(req.body);
+    var prodPrice = Number(req.body.price).toFixed(2);
+
+    console.log(prodPrice);
     var product = new Product();
     product.name = req.body.name;
     product.code = req.body.code;
-    product.price = req.body.price;
+    product.price = prodPrice;
     product.imageUrl = req.body.imageUrl;
     product.category = req.body.category;
-    product.catCode = req.body.catCode;
+    product.department_id = req.body.department_id;
+    product.category_id = req.body.category_id;
+    product.subcategory_id = req.body.subcategory_id;
     product.stock = req.body.stock;
 
     product.description.detail = req.body.detail;
@@ -54,10 +71,10 @@ postProduct = function(req, res, next){
         }
         res.redirect('/admin/products');
     });
-    // res.redirect('/admin/products');
+    
     
 }
-removeProduct = function(req, res){
+removeProduct = function(req, res, next){
     let idParam = req.params.id;
     let product = Product.remove({_id: idParam});
         product.exec(function(err){
@@ -65,7 +82,7 @@ removeProduct = function(req, res){
         });
     res.redirect('/admin/products');  
 }
-editProduct = function(req, res){
+editProduct = function(req, res, next){
     
     var id = req.params.id;
     Product.findOne({_id: id}).exec(function(err, product){
@@ -76,17 +93,20 @@ editProduct = function(req, res){
     })
     
 }
-updateProduct = function(req, res){
+updateProduct = function(req, res, next){
     let queryId = req.params.id;
     // console.log(req.body);
     // console.log(queryId);
+    var prodPrice = Number(req.body.price).toFixed(2);
     let upProduct = {
         name: req.body.name,
         code: req.body.code,
-        price: req.body.price,
+        price: prodPrice,
         imageUrl: req.body.imageUrl,
         category: req.body.category,
-        catCode: req.body.catCode,
+        department_id: req.body.department_id,
+        category_id: req.body.category_id,
+        subcategory_id: req.body.subcategory_id,
         stock: req.body.stock,
 
         description: {
@@ -113,4 +133,8 @@ updateProduct = function(req, res){
 
 }
 
-module.exports = {showProducts, productform, postProduct, removeProduct, updateProduct, editProduct};
+module.exports = {
+    showProducts, productform, postProduct, 
+    removeProduct, updateProduct, editProduct,
+    viewProduct
+};

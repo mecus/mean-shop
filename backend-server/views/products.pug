@@ -1,8 +1,8 @@
 extends layout
 block content
-	.w3-container.product-list
+	.w3-container.product-list.jumbotron(style="position: relative; top: 50px;")
 		.w3-card-4-7
-			table.table
+			table.table.table-striped
 				thead.thead-default
 					tr
 						th Publish
@@ -10,36 +10,47 @@ block content
 						th Image
 						th Product Name
 						th Stock
+						//- th Dept
 						th Category
 						th Price
 						th Origin
-						th(colspan='3')
+						th(colspan='2')
 				tbody
 					each product in products
 						tr
 							th 
 								= product.publish
-							th 
+							td 
 								= product.code
-							th 
-								imageUp-wrapper.form-group(onclick="getId(this.id)" id=product.id)
+							td
+								- if(product.imageUrl !== undefined)
 									img(src=product.imageUrl width="50")
-									input.form-control-file#loadimage(type="file", accept="image/*", onclick="uploadImage()")
+									//- imageUp-wrapper.form-group(onclick="getId(this.id)" id=product.id)
+									//- 	img(src=product.imageUrl width="50")
+									//- 	input.form-control-file#loadimage(type="file", accept="image/*")
 							td
 								= product.name
 							td
 								= product.stock
-							th
+							//- th
+							//- 	= product.department
+							td
 								= product.category
+							
 							td
 								span £ 
-								= product.price
+								span= product.price
 								
 							td
 								= product.description.origin
 							td
-								a.editproduct(href="/admin/product/edit/"+product.id) Edit
+								a(onclick="getId(this.id)", id=product.id, href="/admin/product/"+product.id) View
+							//- td
+							//- 	a.editproduct(href="/admin/product/edit/"+product.id) Edit
 							td
 								a(href="" onclick="deleteProduct(this)" data-id=product.id)
 									i.fa.fa-times(aria-hidden='true')
+							
+							
+									
 	

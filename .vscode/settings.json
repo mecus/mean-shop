@@ -10,7 +10,8 @@
         "**/CVS": true,
         ".gitignore": true,
         "**/.DS_Store": true,
-        "public": true
+        "public": true,
+        "src/express-assets/styles/*.css": true
     }
 
 }

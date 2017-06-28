@@ -10,13 +10,15 @@ html
 		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
 		link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
 		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-		link(rel="stylesheet" href="/express-assets/styles/ex-styles.css")
+		link(rel="stylesheet" href="/express-assets/styles/main.css")
 
 		
 	body
 		include navigation
-		.container
+		.container-wrapper
 			block content
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+
 		script(src="/express-assets/js/javascript.js")
-		//- script(src="https://unpkg.com/axios/dist/axios.min.js")
+		script(src="/express-assets/js/cloudinary_fileupload.js", type="text/javascript")
+		script(src="https://unpkg.com/axios/dist/axios.min.js")

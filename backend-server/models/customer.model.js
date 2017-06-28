@@ -13,7 +13,7 @@ var CustomerSchema = new mongoose.Schema({
     },
     gender: String,
     email: String,
-    telephone: String
+    telephone: Number
 
 }, {timestamps: true})
 

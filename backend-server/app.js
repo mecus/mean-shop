@@ -10,6 +10,7 @@ var fs              = require('fs');
 var mongoose        = require('mongoose');
 var multer          = require('multer');
 var uploadForm      = multer();
+// var upload          = multer({dest: __dirname+'../src/express-assets/uploads'});
 var cloudinary      = require('cloudinary');
 var expressValidator = require('express-validator');
 var passport        = require('passport');
@@ -23,13 +24,17 @@ var authConfig      = require('./configurations/passportAuthentication');
 var angularController = require('./controllers/angular-frontend');
 var productsController= require('./controllers/products');
 var adminIndex      = require('./controllers/admin-index');
-var productApi      = require('./api/v1/product.route');
 var uploader        = require('./controllers/uploader');
 var department      = require('./controllers/department');
 var category        = require('./controllers/category');
 var orders          = require('./controllers/orders');
 var customers       = require('./controllers/customers');
 var users    = require('./controllers/users');
+var subCat      = require('./controllers/sub-category');
+
+//Api imports
+var productApi      = require('./api/v1/product.route');
+var categoryApi      = require('./api/v1/category.route');
 
 require('dotenv').config({path: '.env'});
 
@@ -45,7 +50,7 @@ dbConnect(mongoose);
 app.set("port", process.env.PORT || 3000);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, "../src")));
+app.use(express.static(path.join(__dirname, "../src")));//Need to be changed to public
 
 //Implementing Body-Parser
 //Set Cors Options Later
@@ -74,7 +79,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(function(req, res, next){
-  res.locals.user = req.user;
+  res.locals.currentUser = req.user;
 //   console.log('This is Log user:' +req.user);
      console.log(req.isAuthenticated());
   next();
@@ -104,16 +109,19 @@ app.get('/admin/logout', users.logOut);
 
 //API ROUTES
 api.get('/v1/products', productApi.getProducts);
+api.get('/v1/products/:id', productApi.getProduct);
+api.get('/v1/category/:id', categoryApi);
 app.use('/api', api);
 
 //Express Inhouse route
-app.get('/admin/dashboard', adminIndex)
+app.get('/admin/dashboard', users.isAuthenticated, adminIndex)
 app.get('/admin/product/new/:id', productsController.productform);
 app.get('/admin/products', users.isAuthenticated, productsController.showProducts);
 app.post('/admin/products/submit', productsController.postProduct);
 app.get('/admin/product/edit/:id', productsController.editProduct);
 app.post('/admin/product/update/:id', productsController.updateProduct);
 app.delete('/admin/products/:id', productsController.removeProduct);
+app.get('/admin/product/:id', productsController.viewProduct);
 
 app.post('/admin/upload', uploader);
 
@@ -121,8 +129,14 @@ app.get('/admin/store', department.getDept);
 app.post('/admin/dept', department.postDept);
 app.delete('/admin/dept/:id', department.deleteDept);
 app.get('/admin/dept/:id', department.getCatDept);
+
 app.post('/admin/cat', category.postCategory);
+app.get('/admin/category/:id', category.getCategory);
 app.delete('/admin/cat/:id', category.deleteCategory);
+
+app.get('/admin/subcat/add/:id', subCat.getSubCategory);
+app.post('/admin/subcat/add', subCat.postSubCategory);
+app.delete('/admin/subcat/:id', subCat.deleteSubCategory);
 
 app.get('/admin/orders', orders.getOrders);
 

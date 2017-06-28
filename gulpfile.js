@@ -72,6 +72,12 @@ gulp.task('sass', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('src'));
 });
+gulp.task('node-sass', function(){
+    return gulp.src('src/express-assets/styles/*.scss')
+        .pipe(concat('main.css'))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('src/express-assets/styles'));
+})
 gulp.task('copy:style', function(){
     return gulp.src('src/styles.css').pipe(gulp.dest('public'));
 });
@@ -113,7 +119,7 @@ gulp.task('tSCompiler', function () {
 
 //Watching Sass for changes
 gulp.task('sass:watch', function(){
-    gulp.watch(['src/assets/**/*.scss', 'src/*.scss'], ['sass']);
+    gulp.watch(['src/assets/**/*.scss', 'src/*.scss', 'src/express-assets/styles/*.scss'], ['sass', 'node-sass']);
 });
 
 // Group task

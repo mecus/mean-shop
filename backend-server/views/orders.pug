@@ -1,5 +1,44 @@
 extends layout
 block content
-	.w3-container
+	.w3-container.jumbotron
 		.w3-card-6
-			h1 #{title}
+			h4 #{title}
+			table.table.table-striped
+				thead.thead-default
+					tr
+						th Order_Id
+						th Customer Name
+						th Email
+						th Amount
+						th Order Date
+						th completed
+						th(colSpan="2")
+				tbody
+					tr
+						td Kj09887744
+						td Joe Morgan
+						td Morgan@gmail.com
+						td £500.00
+						td 30/06/2017
+						td Yes/No
+						td View
+						td x
+					tr
+						td Kj09887744
+						td Joe
+						td Morgan
+						td £500.00
+						td 30/06/2017
+						td Yes/No
+						td View
+						td x
+					tr
+						td Kj09887744
+						td Joe
+						td Morgan
+						td £500.00
+						td 30/06/2017
+						td Yes/No
+						td View
+						td x
+

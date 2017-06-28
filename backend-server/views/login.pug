@@ -1,32 +1,34 @@
-extends admin-layout
+extends auth-layout
 block content
-	.w3-container(style="margin-top:50px")
-		.w3-card-6(style="width: 600px; margin:0 auto")
-			- if (messages.error)
-				each err in messages.error
+	.page-holder(style="background-color:#092d3d; height:100vh; position: fixed; width:100%;")
+		.w3-container(style="margin-top:150px")
+			.w3-card-6(style="width: 600px; margin:0 auto")
+				- if (messages.error)
+					each err in messages.error
+						.alert.alert-danger(role='alert')
+							span= err.msg
+				- if (messages.dbError)
 					.alert.alert-danger(role='alert')
-						span= err.msg
-			- if (messages.dbError)
-				.alert.alert-danger(role='alert')
-					span= messages.dbError
-			.container
-				form.jumbotron(method="POST")
-					input(type='hidden', name='_csrf', value=_csrf)
-					.form-group.row
-						label.col-sm-2.col-form-label(for='username') Username
-						.col-sm-10
-							input#username.form-control(name="username", type='text', placeholder='Username')
-					.form-group.row
-						label.col-sm-2.col-form-label(for='Password') Password
-						.col-sm-10
-							input#password.form-control(name="password", type='password', placeholder='Password')
-			
-					.form-group.row
-						.offset-sm-2.col-sm-10
-							button.btn.btn-primary(type='submit') Login
-						a(href="/admin/registration") Register
+						span= messages.dbError
+				.container
+					form.jumbotron(method="POST", style="background-color:#092d3d; border:1px solid #ffc900; color:#ffc900;")
+						input(type='hidden', name='_csrf', value=_csrf)
+						.form-group.row
+							label.col-sm-2.col-form-label(for='username') Username
+							.col-sm-10
+								input#username.form-control(name="username", type='text', autocomplete="off", placeholder='Username')
+						.form-group.row
+							label.col-sm-2.col-form-label(for='Password') Password
+							.col-sm-10
+								input#password.form-control(name="password", type='password', autocomplete="off", placeholder='Password')
+				
+						.form-group.row
+							.offset-sm-2.col-sm-10
+								button.btn.btn-primary(type='submit', style="background-color:#ffc900; color:#092d3d;") Login
+								a(href="/admin/registration")
+									span(style="margin-left:20px;") Register
 
-		
+			
 
 
 

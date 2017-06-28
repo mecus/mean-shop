@@ -1,17 +1,21 @@
 var mongoose =  require('mongoose');
+require('mongoose-double')(mongoose);
+var SchemaTypes = mongoose.Schema.Types;
+
 //Creating Article Schema
 var Schema = mongoose.Schema;
 var productSchema = new Schema({
     name: String,
     code: String,
-    price: String,
+    price: SchemaTypes.Double,
     imageUrl: String,
     category: {
-        type: Array
+        type: String
     },
-    catCode: String,
+    department_id: String,
+    category_id: String,
+    subcategory_id: String,
     stock: Number,
-    department: String,
     description: {
         detail: String,
         size: String,

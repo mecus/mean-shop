@@ -1,17 +1,15 @@
 extends layout
 block content
-	.container(style="width:700px")
+	.container(style="width:700px; margin-top:70px; ")
 	
 		form.jumbotron(action="/admin/products/submit", method="POST")
-			.form-group.row
-				label.col-sm-3.col-form-label(for='storeDepartment') Store Dept
-				.col-sm-9
-					h5 #{department.name}
-					input#storeDepartment.form-control(name="department", value=department.name, hidden="" type='text')
 			//- .form-group.row
-			//- 	label.col-sm-3.col-form-label(for='imageUp') UpLoad Image
+			//- 	label.col-sm-3.col-form-label(for='storeDepartment') Store Dept
 			//- 	.col-sm-9
-			//- 		input(name="imageUp" onchange="upLoadImage(this)" id="imageUp" type='file')
+					//- h5 #{department.name}
+			input#categoryId.form-control(name="category_id", value=category.category_id, hidden="", type='text')
+			input#departmentId.form-control(name="department_id", value=category.department_id, hidden="", type='text')
+			input#subcategoryId.form-control(name="subcategory_id", value=category.id, hidden="" type='text')
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodName') Name
 				.col-sm-9
@@ -24,20 +22,17 @@ block content
 				label.col-sm-3.col-form-label(for='prodPrice') Price
 				.col-sm-9
 					input#prodPrice.form-control(name="price", type='text', placeholder='price')
-			.form-group.row
-				label.col-sm-3.col-form-label(for='prodimageUrl') Image
-				.col-sm-9
-					input#prodimageUrl.form-control(name="imageUrl", type='text', placeholder='image link')
+			
+			input#prodimageUrl.form-control(hidden="", name="imageUrl", type='text', value="www.imageurl.com", placeholder='image link')
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodCategory') Category
 				.col-sm-9
-					select.form-control(name="category[]", multiple='')
-						each cat in category
-							option(value=cat.name) #{cat.name}
-			.form-group.row
-				label.col-sm-3.col-form-label(for='prodCategoryCode') Category Code
-				.col-sm-9
-					input#prodCategoryCode.form-control(name="catCode", type='text', placeholder='category code')
+					span #{category.name}
+					input#prodCategory.form-control(name="category", hidden="" value=category.name type='text', placeholder='Category')
+					//- select.form-control(name="category[]", multiple='')
+					//- 	each cat in category
+					//- 		option(value=cat.name) #{cat.name}
+			
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodStock') Stock Qty
 				.col-sm-9
@@ -92,14 +87,15 @@ block content
 				.col-sm-10
 					.form-check
 						label.form-check-label
-							input#publish1.form-check-input(name="publish", value="true", type='radio', checked='')
+							input#publish1.form-check-input(name="publish", value="true", type='radio')
 							|             Selecting this option will publish the product
 					.form-check
 						label.form-check-label
-							input#publish2.form-check-input(name="publish", value="false", type='radio')
+							input#publish2.form-check-input(name="publish", value="false", type='radio', checked='')
 							|             Chose this option if you are not ready to display the product
 					
 			.form-group.row
 				.offset-sm-8.col-sm-4
 					button.btn.btn-primary(type='submit') Save product
+					a(href="/admin/store", style="opacity:0.5;") Cancel
 

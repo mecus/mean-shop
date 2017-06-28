@@ -1,28 +1,33 @@
-nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top(style="background-color:#092d3d; color:#59859b;")
 	button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
 		span.navbar-toggler-icon
-	a.navbar-brand(href='/admin/dashboard') ShopAdminPanel
+	a.navbar-brand(href='/admin/dashboard')
+		i.fa.fa-home(aria-hidden="true", style="font-size:30px; color:#59859b;" ) AdminPanel
 	#navbarSupportedContent.collapse.navbar-collapse
 		ul.navbar-nav.mr-auto
 			li.nav-item.active
-				a.nav-link(href='/')
+				a.nav-link(href='/', style="color:#59859b;")
 					| FrontEnd 
 					span.sr-only (current)
 			//- li.nav-item
 			//- 	a.nav-link(href='/admin/product/new') Add Product
 			li.nav-item
-				a.nav-link(href='/admin/products') Products
+				a.nav-link(href='/admin/products', style="color:#59859b;") Products
 			li.nav-item
-				a.nav-link(href='/admin/store') Stock mgt
+				a.nav-link(href='/admin/store', style="color:#59859b;") Stock mgt
 			li.nav-item
-				a.nav-link(href='/admin/orders') Orders
+				a.nav-link(href='/admin/orders', style="color:#59859b;") Orders
 			li.nav-item
-				a.nav-link(href='/admin/customers') Customers
+				a.nav-link(href='/admin/customers', style="color:#59859b;") Customers
 			li.nav-item
-				a.nav-link(href='#') Contacts
+				a.nav-link(href='#', style="color:#59859b;") Contacts
 		form.form-inline.my-2.my-lg-0
-			li.nav-item
-				- if(!user)
+			- if(currentUser)
+				li.nav-item(style="list-style:none")
+					i.fa.fa-user(aria-hidden="true", style="font-size:20px; padding-right:5px;" ) 
+						span #{currentUser.username}
+			li.nav-item(style="list-style:none")
+				- if(!currentUser)
 					a.nav-link(href="/admin/login") Login
 				-else
 					a.nav-link(href="/admin/logout") Logout

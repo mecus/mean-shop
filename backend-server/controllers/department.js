@@ -1,17 +1,23 @@
 var Department = require('../models/department.model');
 var Category = require('../models/category.model');
+var Product = require('../models/product.model');
+var SubCategory = require('../models/sub-category.model');
 
 getDept = function(req, res){
     Department.find({}, function(err, dept){
-       res.render('department', output = {dept});
+        
+        res.render('department', output = {dept});
+        
     }); 
 }
 getCatDept = function(req, res){
-    
+    var id = req.params.id;
     Department.find({}, function(err, dept){
-        Category.find({department_id:req.params.id})
+        Category.find({department_id:id})
         .exec(function(err, category){
-            res.render('department', output = {dept, category, queryId: req.params.id});
+            Product.find({deptId: id}, function(err, products){
+                res.render('department', output = {dept, category, products, queryId: req.params.id});
+            })
         });
     });  
 }
@@ -33,14 +39,25 @@ postDept = function(req, res){
         }
     })  
 }
-deleteDept = function(req, res){
+deleteDept = function(req, res, next){
+    var queryId = req.params.id;
+    // Remove all Products associated to the department
+    var prodbulk = Product.collection.initializeUnorderedBulkOp();
+    prodbulk.find({department_id:queryId}).remove();
+    prodbulk.execute();
+
+    //Removing Sub-Category
+    var subCatbulk = SubCategory.collection.initializeUnorderedBulkOp();
+    prodbulk.find({department_id:queryId}).remove();
+    prodbulk.execute();
+
     //Removing all Categories related to the Department
     var bulk = Category.collection.initializeUnorderedBulkOp();
-    bulk.find( { department_id:req.params.id } ).remove();
+    bulk.find( { department_id:queryId } ).remove();
     bulk.execute();
 
    //Removing the actual Department
-    Department.remove({_id:req.params.id}).exec(function(err){
+    Department.remove({_id:queryId}).exec(function(err){
         console.error(err);
         req.flash('deleteMessage', 'Department was successfully Deleted!!');
         res.redirect('/admin/store');

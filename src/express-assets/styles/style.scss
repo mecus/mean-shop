@@ -25,3 +25,25 @@ imageUp-wrapper{
 .form-input input{
     margin: 5px 0px;
 }
+
+/*--View Product --*/
+#loadimage{
+    position: absolute;
+    top: 0px;
+    left: 12px;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    z-index: 100; 
+}
+.upload-image-text{
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    margin: 0 auto;
+    z-index: 100;
+}
+
+.deptForm{
+    display: none;
+}

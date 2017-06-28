@@ -1,18 +1,48 @@
-extends layout
+extends admin-layout
 block content
-	.w3-container
-		.w3-card-4(style="width: 600px")
-			- if (messages.dbSuccess)
-					.alert.alert-success(role='alert')
-						span= messages.dbSuccess
-		.jumbotron
-			h1.display-3 Hello,
-				- if (user)
-					= user.username
-			p.lead
-				| This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
-			hr.my-4
-			p
-				| It uses utility classes for typography and spacing to space content out within the larger container.
-			p.lead
-				a.btn.btn-primary.btn-lg(href='#', role='button') Learn more
+	.content-wrapper
+		.container(style="margin-top:50px")
+			.w3-card-6(style="width: 600px, margin: 0 auto")
+				- if (messages.dbSuccess)
+						.alert.alert-success(role='alert')
+							span= messages.dbSuccess
+			.container-wrapper
+				.row
+					.col.col-lg-3
+						.jumbotron
+							h1.display-6 Products
+							
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/products', role='button')
+									span See #{num} Items
+							
+					.col.col-lg-3
+						.jumbotron
+							h1.display-6 Manager
+						
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/store', role='button') Manage Products
+					.col.col-lg-3
+						.jumbotron
+							h1.display-6 Orders
+					
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/orders', role='button') View Orders
+					.col.col-lg-3
+						.jumbotron
+							h1.display-6 Customers
+							
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='#', role='button') Our Customers

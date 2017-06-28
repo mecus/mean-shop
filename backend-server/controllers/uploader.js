@@ -1,3 +1,4 @@
+var Product         = require('../models/product.model');
 var cloudinary      = require('cloudinary');
 var fs              = require('fs');
 var path            = require('path');
@@ -8,13 +9,19 @@ cloudinary.config({
   api_secret: 'hfll2wcsfo2SXltiO2LiRxZ5Y0k' 
 });
 
-imageUp = function(req, res){
-    var file = req.body;
-    console.log(file);
+imageUpload = function(req, res, next){
+    var id = req.body.id;
+    var url = req.body.data;
+
+    Product.update({_id: id}, {$set: {imageUrl: url}}, {upsert: true}, function(err){
+      if(err){return next(err)}
+      console.log("Image updated");
+      res.redirect('/admin/products');
+    });
    
     // cloudinary.uploader.upload(file.value,
     //   function(result){console.log(result)}, {public_id: "shop_image"})
 
 }
 
-module.exports = imageUp;
+module.exports = imageUpload;

@@ -3,6 +3,9 @@ block content
 	.container(style="width:700px")
 		h6 Editing #{product.name}
 		form.jumbotron(action="/admin/product/update/"+product._id method="POST")
+			input#categoryId.form-control(name="category_id", value=product.category_id, hidden="", type='text')
+			input#departmentId.form-control(name="department_id", value=product.department_id, hidden="", type='text')
+			input#subcategoryId.form-control(name="subcategory_id", value=product.subcategory_id, hidden="", type='text')
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodName') Name
 				.col-sm-9
@@ -15,30 +18,25 @@ block content
 				label.col-sm-3.col-form-label(for='prodPrice') Price
 				.col-sm-9
 					input#prodPrice.form-control(name="price", value=product.price, type='text', placeholder='price')
-			.form-group.row
-				label.col-sm-3.col-form-label(for='prodimageUrl') Image
-				.col-sm-9
-					input#prodimageUrl.form-control(name="imageUrl", value=product.imageUrl, type='text', placeholder='image link')
+			
+			input#prodimageUrl.form-control(hidden="", name="imageUrl", value=product.imageUrl, type='text', placeholder='image link')
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodCategory') Category
 				.col-sm-9
-					
+					span #{product.category}
 					//- textarea#prodCategory.form-control(name="category[]", type='text')
 					//- 	each cat in product.category
 					//- 		= cat
-					.row
-						each cat in product.category
-							.col-2(style="color:lightslategey; padding: 5px; margin-left:20px; opacity: 0.2;")
-								= cat
+					//- .row
+					//- 	each cat in product.category
+					//- 		.col-2(style="color:lightslategey; padding: 5px; margin-left:20px; opacity: 0.2;")
+					//- 			= cat
 
-					select.form-control(name="category[]", multiple="")
-						each cat in category
-							option(value=cat.name) #{cat.name}
-					//- input#prodCategory.form-control(name="category", value=product.category, type='text', placeholder='category')
-			.form-group.row
-				label.col-sm-3.col-form-label(for='prodCategoryCode') Category Code
-				.col-sm-9
-					input#prodCategoryCode.form-control(name="catCode", value=product.catCode, type='text', placeholder='category code')
+					//- select.form-control(name="category[]", multiple="")
+					//- 	each cat in category
+					//- 		option(value=cat.name) #{cat.name}
+					input#prodCategory.form-control(name="category", value=product.category, type='text', hidden="", placeholder='category')
+		
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodStock') Stock Qty
 				.col-sm-9
@@ -104,3 +102,4 @@ block content
 			.form-group.row
 				.offset-sm-8.col-sm-4
 					button.btn.btn-primary(type='submit') Save product
+					a(href="/admin/products", style="margin-left:10px; opacity:0.5;") Cancel
