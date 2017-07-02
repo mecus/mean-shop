@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 export class ProductService {
   public products;
   resourceUrl = "http://localhost:3000/api/v1/products";
+  dataResource = "http://localhost:3000/api/v1/storedata";
 
 
   constructor( private _http:Http) { }
@@ -27,9 +28,19 @@ export class ProductService {
   //     });
   // }
 
-  getProducts(){
-    this._http.get(this.resourceUrl).map((res)=>{
-      console.log(res);
-    })
+  getProducts():Observable<any>{
+    return this._http.get(this.dataResource).map((res)=>{
+     this.products = res.json();
+     return this.products;
+     
+    }).catch(this.handleError);
+    
+  }
+  handleError(err):Observable<any>{
+    if (err.status === 302 || err.status === "302"){
+      return err.json();
+    }else{
+      return Observable.throw(new Error(err.status));
+    }
   }
 }

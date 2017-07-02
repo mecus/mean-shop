@@ -1,14 +1,20 @@
 const Product = require('../../models/product.model');
+const Department  = require('../../models/department.model');
 
 getProducts = function(req, res, next){
-     Product.find({publish: true}, function(err, products){
+    Department.find({}).exec(function(err, department){
+        if(err){return next(err);}
+
+        Product.find({publish: true}, function(err, products){
             if(err){
                 res.statusCode = 406;
                 res.json({"Error": "Content not available"});
             }else{
-                res.json(products);
+                res.json({department, products});
             }
-    });
+        });
+    })
+    
 
     // if(req.headers['content-type'] !== undefined){
     //     res.status(415).json({"Error": "Content-Type is require"});

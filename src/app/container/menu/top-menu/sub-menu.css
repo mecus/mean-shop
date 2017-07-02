@@ -6,23 +6,26 @@
     line-height: 40px;
     color:#fff;
 }
-.navigation{
-    display: -webkit-flex;
-    display: flex;
+nav{
+    height: 40px;
+    background-color: #000;
     
 }
-.nav-item{
-    padding: 0px 10px;
-    
+.navbar ul li a{
+    color: lightslategrey;
+    height: 40px;
 }
-.nav-item:hover{
+.navbar ul li a:hover{
     background-color: #f5f5f5;
-    color: black;
+    color: lightslategrey !important;
+    height: 40px;
+    cursor: pointer;
 }
 
-.active{
+.active {
     background-color: #f5f5f5;
-    color: lightslategray;
+    height: 40px;
+    color: #000 !important; 
 }
 .authentication{
     position: absolute;

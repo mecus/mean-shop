@@ -15,10 +15,9 @@ const root:Route = {
 }
 const routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: products.ProductComponent },
-  { path: 'products/?', component: products.CategoryDisplayComponent },
-  { path: 'tax', component: tax.TaxanomyComponent },
-  { path: 'products/new', component: NewProductComponent } 
+  { path: 'products/?', component: products.ProductComponent },
+
+  { path: 'products/new', component: NewProductComponent }
  
 ]
 

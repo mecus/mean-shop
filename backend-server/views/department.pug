@@ -34,13 +34,14 @@ block content
 						th
 							h2 Store Departments
 						//- th Store Code
-						//- th 
+						th 
 						th(colSpan="1")
 						th
-							span.badge.badge-default.badge-pill
-								i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
+							- if(!output.oneDept)
+								span.badge.badge-default.badge-pill
+									i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
+									
 								
-							
 						
 				tbody
 					
@@ -55,10 +56,24 @@ block content
 							td
 								span.badge.badge-default.badge-pill
 									a(href="/admin/category/"+dept.id id="show-cat") Select
-							//- td
-							//- 	span.badge.badge-default.badge-pill() Edit
+							td
+								span.badge.badge-default.badge-pill()
+									a(href="/admin/dept/"+dept.id) Edit
 							
 							td
 								span.badge.badge-default.badge-pill
 									a(href="" onclick="deleteDepartment(this)" data-id=dept.id)
 										i.fa.fa-times(aria-hidden='true')
+		- if(output.oneDept)
+			.w3-card-4-9(id="deptForm" style="margin: 0px auto;")
+				h6 Edit Department
+				form.jumbotron(action="/admin/store/"+output.oneDept.id, method="POST")
+					.closeForm
+						span.badge.badge-default.badge-pill
+							i.fa.fa-times(aria-hidden='true' onclick="closeDeptForm()" id="true")
+									
+					.form-input.form-group
+						input.form-control(name='name', value=output.oneDept.name, required='', type='text', placeholder='Department Name')
+						input.form-control(name='code', value=output.oneDept.code, type='text', placeholder='Department Code')
+					.save-btn
+						button.btn.btn-primary(type='submit') Update

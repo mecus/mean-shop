@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { ProductService } from '../../services/product.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   products ;
   resourceUrl = "http://localhost:3000/api/v1/products";
 
-  constructor(private _http:Http) {
+  constructor(private _http:Http, private productService:ProductService) {
     let dbRef = firebase.database().ref('/products');
       dbRef.once('value').then((snapshot)=>{
         // this.products = snapshot.val();
@@ -24,10 +25,9 @@ export class HomeComponent implements OnInit {
    }
   
   ngOnInit() {
-    // console.log(this.products);
-    this._http.get("http://localhost:3000/api/v1/products").map((res)=>{
-      this.products = res.json();
-    }).subscribe();
+    this.productService.getProducts().subscribe((data)=>{
+      this.products = data.products
+    });
   }
 
 }

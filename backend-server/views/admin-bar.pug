@@ -1,8 +1,8 @@
-nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.admin-nav
     button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
     a.navbar-brand(href='/admin/dashboard')
-        i.fa.fa-home(aria-hidden="true", style="font-size:30px;" )
+        i.fa.fa-home(aria-hidden="true")
     #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
             //- li.nav-item.active
@@ -28,8 +28,8 @@ nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
                         span #{currentUser.username}
             li.nav-item(style="list-style:none")
                 - if(!currentUser)
-                    a.nav-link(href="/admin/login") Login
+                    a.nav-link(href="/admin/login", style="color:#ffc900 !important;") Login
                 -else
-                   a.nav-link(href="/admin/logout") logout
+                   a.nav-link(href="/admin/logout", style="color:#ffc900 !important;") logout
             //- input.form-control.mr-sm-2(type='text', placeholder='Search')
             //- button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

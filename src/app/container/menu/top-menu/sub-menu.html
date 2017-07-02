@@ -1,4 +1,4 @@
- <div class="sub-toolbar">
+ <!--<div class="sub-toolbar">
     <div class="side-menu-btn">
         <button md-icon-button [mdMenuTriggerFor]="menu">
         <md-icon>menu</md-icon>
@@ -26,19 +26,27 @@
         </button>
         </md-menu>
     </div>
-     
-    <div class="container">
-        <div class="navigation">
-            <div class="nav-item active" (click)="frozenFood()">Frozen Food</div>
-            <div class="nav-item" (click)="dryFood()">Dry Food</div>
-            <div class="nav-item" (click)="beverages()">Beverages</div>
-            <div class="nav-item" (click)="drinks()">Drink</div>
-            <div class="nav-item" (click)="ingredients()">Ingredients</div>
-            <div class="nav-item" (click)="bakery()">Bakery</div>
-        </div>
-    </div>
     
-</div>
+</div>-->
+<nav class="navbar navbar-toggleable-md">
+    <div class="navbar container">
+         <ul class="navbar-nav mr-auto" >
+            <li class="nav-item" *ngFor="let dept of departments">
+                <a [class.active]=dept.selected class="nav-link" (click)="selectedDept(dept)">{{dept.name}}<span class="sr-only">(current)</span></a>
+            </li>
+            <!--<li class="nav-item dropdown navbar-right">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</nav>
 <div class="authentication" *ngIf="loginWindow">
   <div class="login-provider container">
       <p (click)="closeWindow()">x</p>

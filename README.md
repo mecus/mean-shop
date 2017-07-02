@@ -1,10 +1,10 @@
 
-# MEAN STACK APPLICATION
+## MEAN STACK APPLICATION
     Name: Shop App
     Discription: CREATING ONLINE SHOPPING APP FOR AFRO CARRIBEAN FOODS
 
     This application was coded from scratch by the author and also can be used as a boilerplate for other app.
-# AUTHOR: 
+## AUTHOR: 
     AUSTIN OSEH
         Full stack web developer
 

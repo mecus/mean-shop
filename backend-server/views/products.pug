@@ -1,7 +1,7 @@
 extends layout
 block content
 	.w3-container.product-list.jumbotron(style="position: relative; top: 50px;")
-		.w3-card-4-7
+		.w3-card-4-7.container
 			table.table.table-striped
 				thead.thead-default
 					tr
@@ -52,5 +52,20 @@ block content
 									i.fa.fa-times(aria-hidden='true')
 							
 							
-									
-	
+	- if(products.length > 1)						
+		nav(aria-label='Page navigation example')
+			ul.pagination.justify-content-center
+				li.page-item
+					a.page-link(href='#', aria-label='Previous')
+						span(aria-hidden='true') «
+						span.sr-only Previous
+				li.page-item
+					a.page-link(href='#') 1
+				li.page-item
+					a.page-link(href='#') 2
+				li.page-item
+					a.page-link(href='#') 3
+				li.page-item
+					a.page-link(href='#', aria-label='Next')
+						span(aria-hidden='true') »
+						span.sr-only Next

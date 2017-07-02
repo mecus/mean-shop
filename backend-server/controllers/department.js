@@ -27,7 +27,8 @@ postDept = function(req, res){
     // validate req body
     var dept = new Department();
     dept.name = req.body.name,
-    dept.code = req.body.code
+    dept.code = req.body.code,
+    dept.selected = false
 
     dept.save(function(err){
         if(err){
@@ -38,6 +39,30 @@ postDept = function(req, res){
             res.redirect('/admin/store');
         }
     })  
+}
+editDept = function(req, res, next){
+    var queryId = req.params.id;
+    
+    Department.find({}, function(err, dept){
+        Department.findOne({_id:queryId}, function(err, oneDept){
+            res.render('department', output = {dept, oneDept});
+        })
+        
+    })  
+}
+
+updateDept = function(req, res, next){
+    var queryId = req.params.id;
+    var updateDep = {
+        name: req.body.name,
+        code: req.body.code,
+        selected: false
+    }
+    Department.update({_id:queryId}, updateDep, function(err){
+        if(err){return next(err);}
+        res.redirect('/admin/store');
+    });
+
 }
 deleteDept = function(req, res, next){
     var queryId = req.params.id;
@@ -64,4 +89,4 @@ deleteDept = function(req, res, next){
     })
 }
 
-module.exports = {getDept, postDept, deleteDept, getCatDept}
+module.exports = {getDept, postDept, deleteDept, getCatDept, editDept, updateDept}

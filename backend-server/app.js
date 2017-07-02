@@ -33,8 +33,10 @@ var users    = require('./controllers/users');
 var subCat      = require('./controllers/sub-category');
 
 //Api imports
+var storeDataApi    = require('./api/v1/store-back-end');
 var productApi      = require('./api/v1/product.route');
-var categoryApi      = require('./api/v1/category.route');
+var categoryApi     = require('./api/v1/category.route');
+var departmentApi      = require('./api/v1/department.route');
 
 require('dotenv').config({path: '.env'});
 
@@ -81,7 +83,7 @@ app.use(flash());
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
 //   console.log('This is Log user:' +req.user);
-     console.log(req.isAuthenticated());
+     console.log("Authenticated: "+req.isAuthenticated());
   next();
 });
 app.use(function(req, res, next){
@@ -108,9 +110,11 @@ app.get('/admin/logout', users.logOut);
 // );
 
 //API ROUTES
+api.get('/v1/storedata', storeDataApi);
 api.get('/v1/products', productApi.getProducts);
 api.get('/v1/products/:id', productApi.getProduct);
 api.get('/v1/category/:id', categoryApi);
+api.get('/v1/departments', departmentApi);
 app.use('/api', api);
 
 //Express Inhouse route
@@ -128,7 +132,8 @@ app.post('/admin/upload', uploader);
 app.get('/admin/store', department.getDept);
 app.post('/admin/dept', department.postDept);
 app.delete('/admin/dept/:id', department.deleteDept);
-app.get('/admin/dept/:id', department.getCatDept);
+app.get('/admin/dept/:id', department.editDept);
+app.post('/admin/store/:id', department.updateDept);
 
 app.post('/admin/cat', category.postCategory);
 app.get('/admin/category/:id', category.getCategory);

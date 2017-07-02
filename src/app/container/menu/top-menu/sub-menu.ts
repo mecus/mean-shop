@@ -1,55 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Http } from '@angular/http';
+import { ProductService } from '../../../services/product.service';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
   selector: 'sub-menu',
   templateUrl: './sub-menu.html',
-  styleUrls:['./sub-menu.scss']
+  styleUrls:['./sub-menu.css']
 })
 export class SubMenuComponent implements OnInit {
     category;
+    departments;
+    selected: boolean =false;
     loginWindow:boolean;
 
-  constructor(private router:Router) {
+  constructor(private router:Router, private productService:ProductService, private _http:Http, private route:ActivatedRoute) {
       
    }
-    authenticate(){
-    this.loginWindow = true;
-   }
-   closeWindow(){
-     this.loginWindow = false;
-   }
-   //Routing to Products page
-   routing(){
-    this.router.navigate(['/products', {products: 'all-category'}]);
-    // this.store.dispatch({type:'NAVIGATE', payload: {products: 'all-category'}});
-   }
-   //Selecting Category
-   selectCategory(){
-    alert(this +"Selected");
-   }
 
-  frozenFood(){
-      this.router.navigate(["/products", {category:'Frozen Food', code_number: "17889789"}]);
+  selectedDept(dept){
+    dept.selected = true;
+    // console.log(dept.name);
+    switch(dept.name){
+      case "Frozen Food":{
+        this.router.navigate(["/products/?", {dept_id:dept._id, name:dept.name, selected: true, code_number: "17889789"}]);
+        break;
+      }
+      case "Dry Food":{
+        this.router.navigate(["/products/?", {dept_id: dept._id, name:dept.name, selected: true, code_number: "209887445"}]);
+        break;
+      }
+      case "Drinks":{
+        this.router.navigate(["/products/?", {dept_id: dept._id, name:dept.name, selected: true, code_number: "209887445"}]);
+        break;
+      }
+      case "Ingredients":{
+        this.router.navigate(["/products/?", {dept_id: dept._id, name:dept.name, selected: true, code_number: "209887445"}]);
+        break;
+      }
+      case "Baverages":{
+        this.router.navigate(["/products/?", {dept_id: dept.id, name:dept.name, selected: true, code_number: "209887445"}]);
+        break;
+      }
+
+      default: {
+        this.router.navigate(["/home"]);
+      }
     }
-  dryFood(){
-     this.router.navigate(["/products", {category: 'Dry Food', code_number: "209887445"}]);
-  }
-   beverages(){
-     this.router.navigate(["/products", {category: 'Baverages', code_number: "367885423"}]); 
-  }
-   drinks(){
-     this.router.navigate(["/products", {category: 'Drinks', code_number: "4564332459"}]); 
-  }
-  ingredients(){
-     this.router.navigate(["/products", {category: 'Ingredients', code_number: "4564332459"}]);
-  }
-  bakery(){
-    this.router.navigate(["/products", {category: 'Bakery', code_number: "4564332459"}]);  
+
+    this.route.params.forEach((param)=>{
+      // console.log(param);
+    });
+    
   }
   
   ngOnInit() {
+    this.productService.getProducts().subscribe((data)=>{
+      this.departments =data.department;
+    });
   }
 
 }

@@ -1,16 +1,16 @@
 extends admin-layout
 block content
 	.content-wrapper
-		.container(style="margin-top:50px")
-			.w3-card-6(style="width: 600px, margin: 0 auto")
-				- if (messages.dbSuccess)
-						.alert.alert-success(role='alert')
-							span= messages.dbSuccess
+		.container
+			//- .w3-card-4-9
+			//- 	- if (messages.dbSuccess)
+			//- 			.flash-msg
+			//- 				span= messages.dbSuccess
 			.container-wrapper
 				.row
 					.col.col-lg-3
 						.jumbotron
-							h1.display-6 Products
+							h2.display-6 Products
 							
 							hr.my-4
 							p
@@ -21,16 +21,16 @@ block content
 							
 					.col.col-lg-3
 						.jumbotron
-							h1.display-6 Manager
+							h2.display-6 Manager
 						
 							hr.my-4
 							p
 								| It uses utility classes for typography and spacing to space content out within the larger container.
 							p.lead
-								a.btn.btn-primary.btn-lg(href='/admin/store', role='button') Manage Products
+								a.btn.btn-primary.btn-lg(href='/admin/store', role='button') Manage Store
 					.col.col-lg-3
 						.jumbotron
-							h1.display-6 Orders
+							h2.display-6 Orders
 					
 							hr.my-4
 							p
@@ -39,7 +39,7 @@ block content
 								a.btn.btn-primary.btn-lg(href='/admin/orders', role='button') View Orders
 					.col.col-lg-3
 						.jumbotron
-							h1.display-6 Customers
+							h2.display-6 Customers
 							
 							hr.my-4
 							p

@@ -3,7 +3,7 @@ import { iProduct } from "../../../models/product.model";
 import { Observable } from "rxjs/Observable";
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
-import { TaxanomyService } from '../../../services/taxanomy.service';
+// import { TaxanomyService } from '../../../services/taxanomy.service';
 import { CartService } from '../../../services/cart.service';
 
 
@@ -12,7 +12,7 @@ import { CartService } from '../../../services/cart.service';
 @Component({
   selector: 'cat-display',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.css']
  
 })
 export class CategoryDisplayComponent implements OnInit {
@@ -30,8 +30,7 @@ export class CategoryDisplayComponent implements OnInit {
   
 
   constructor(private route:ActivatedRoute,
-  private _router:Router, private productService:ProductService, private cartService:CartService,
-  private _ts:TaxanomyService) {
+  private _router:Router, private productService:ProductService, private cartService:CartService) {
     // this.carts = cartService.getCart(); //cart pulled out from the database to indicate selection
     // this.carts = this.store.select('cartReducer') //Retrieving cart from the store
    }
@@ -65,18 +64,19 @@ export class CategoryDisplayComponent implements OnInit {
    
     //Retrieving Products from the database
       this.route.params.forEach((param)=>{
-        // this.productService.getProducts().subscribe((products)=>{
-        //   this.products = products.filter((product)=> product.category == param['category'] )
-          
+        this.productService.getProducts().subscribe((data)=>{
+          this.products = data.products;
+          this.category  = data.department;
+        
+        })
 
-        // })
-        let dbRef = firebase.database().ref('/products');
-          dbRef.once('value').then((snapshot)=>{
-            this.products = snapshot.val().filter((product)=> product.category == param['category'] )
-            console.log(this.products);
-          });
-        //Displaying Category list
-        // this._ts.getCategory().subscribe((group)=>{
+        // let dbRef = firebase.database().ref('/products');
+        //   dbRef.once('value').then((snapshot)=>{
+        //     this.products = snapshot.val().filter((product)=> product.category == param['category'] )
+        //     console.log(this.products);
+        //   });
+        // Displaying Category list
+        // this.productService.subscribe((group)=>{
         //   this.category = group.filter((cat)=> cat.category == param['category'])
         // })
         let category
