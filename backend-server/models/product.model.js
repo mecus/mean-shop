@@ -9,6 +9,7 @@ var productSchema = new Schema({
     code: String,
     price: SchemaTypes.Double,
     imageUrl: String,
+    photo_id: String,
     category: {
         type: String
     },

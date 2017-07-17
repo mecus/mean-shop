@@ -13,12 +13,12 @@ block content
                     thead.thead-default
                         tr
                             th
-                                h4 Group for #{department.name}
+                                h4 Groups => #{department.name}
                             //- th Id
                             th(colSpan="1")
                             th
                                 span.badge.badge-default.badge-pill
-                                    i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
+                                    i.fa.fa-plus(aria-hidden='true' onclick="openForm()" id="true")
                     tbody
                         each cat in category
                             tr
@@ -32,4 +32,4 @@ block content
                                     span.badge.badge-default.badge-pill
                                         a(href="" onclick="deleteCategory(this)" data-id=cat.id)
                                             i.fa.fa-times(aria-hidden='true') 
-            
+            button.btn.btn-primary(onclick='backward()')  Back

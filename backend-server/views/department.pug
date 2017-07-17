@@ -1,16 +1,16 @@
 extends layout
 block content
-	.container(style="margin-top: 70px; width: 700px;")
+	.container(style="margin-top: 70px;")
 		- if (messages.successMessage)
 			.alert.alert-success(role='alert')
-				span= messages.successMessage 
+				span= messages.successMessage
 		- if (messages.errorMessage)
 			.alert.alert-danger(role='alert')
-				strong Oh snap! 
+				strong Oh snap!
 					span= messages.errorMessage
 		- if (messages.deleteMessage)
 			.alert.alert-warning(role='alert')
-				strong Oh no! 
+				strong Oh no!
 					span= messages.deleteMessage
 
 
@@ -19,8 +19,8 @@ block content
 			form.jumbotron(action="/admin/dept", method="POST")
 				.closeForm
 					span.badge.badge-default.badge-pill
-						i.fa.fa-times(aria-hidden='true' onclick="closeDeptForm()" id="true")
-								
+						i.fa.fa-times(aria-hidden='true' onclick="closeForm()" id="true")
+
 				.form-input.form-group
 					input.form-control(name='name', required='', type='text', placeholder='Department Name')
 					input.form-control(name='code', type='text', placeholder='Department Code')
@@ -32,48 +32,52 @@ block content
 				thead.thead-default
 					tr
 						th
-							h2 Store Departments
+							h2 Product Manager
 						//- th Store Code
-						th 
-						th(colSpan="1")
+						th
+							a(href="/admin/products") See All Products
+						th(colSpan="2")
 						th
 							- if(!output.oneDept)
-								span.badge.badge-default.badge-pill
-									i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
-									
-								
-						
+								button.btn.btn-default(onclick="openForm()")
+									//- span.badge.badge-default.badge-pill
+									i.fa.fa-plus(aria-hidden='true' id="true")
+
+
+
 				tbody
-					
+
 					each dept in output.dept
 						tr
 							th= dept.name
 							//- td= dept.code
-							//- td
-							//- 	span.badge.badge-default.badge-pill
-							//- 		a(href="/admin/product/new/"+dept.id, id="product", data-id=dept.id) Add Product
-									//- i.fa.fa-plus(aria-hidden='true')
 							td
 								span.badge.badge-default.badge-pill
 									a(href="/admin/category/"+dept.id id="show-cat") Select
 							td
+								span.badge.badge-default.badge-pill
+									a(href="/admin/advert/"+dept.id, data-id=dept.id) Advert
+									//- i.fa.fa-plus(aria-hidden='true')
+							td
 								span.badge.badge-default.badge-pill()
 									a(href="/admin/dept/"+dept.id) Edit
-							
+
 							td
 								span.badge.badge-default.badge-pill
 									a(href="" onclick="deleteDepartment(this)" data-id=dept.id)
 										i.fa.fa-times(aria-hidden='true')
+		
 		- if(output.oneDept)
 			.w3-card-4-9(id="deptForm" style="margin: 0px auto;")
-				h6 Edit Department
+				h6 Editing => #{output.oneDept.name}
 				form.jumbotron(action="/admin/store/"+output.oneDept.id, method="POST")
 					.closeForm
 						span.badge.badge-default.badge-pill
-							i.fa.fa-times(aria-hidden='true' onclick="closeDeptForm()" id="true")
-									
+							//- i.fa.fa-times(aria-hidden='true' onclick="closeDeptForm()" id="true")
+
 					.form-input.form-group
 						input.form-control(name='name', value=output.oneDept.name, required='', type='text', placeholder='Department Name')
 						input.form-control(name='code', value=output.oneDept.code, type='text', placeholder='Department Code')
 					.save-btn
 						button.btn.btn-primary(type='submit') Update
+				button.btn.btn-primary(onclick='backward()')  Back

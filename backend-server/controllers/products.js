@@ -2,6 +2,7 @@ const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 const SubCategory = require('../models/sub-category.model');
 const Department = require('../models/department.model');
+const uploader  = require('./uploader');
 const Math = require('mathjs');
 
 
@@ -20,7 +21,7 @@ productform = function(req, res, next){
 viewProduct = function(req, res, next){
     var id = req.params.id;
     Product.findOne({_id:id}, function(err, product){
-        console.log(product);
+        // console.log(product);
         if(err){
             res.redirect('/admin/products');
             return next(err); 
@@ -40,8 +41,6 @@ showProducts = function(req, res, next){
 postProduct = function(req, res, next){
     // console.log(req.body);
     var prodPrice = Number(req.body.price).toFixed(2);
-
-    console.log(prodPrice);
     var product = new Product();
     product.name = req.body.name;
     product.code = req.body.code;
@@ -76,10 +75,15 @@ postProduct = function(req, res, next){
 }
 removeProduct = function(req, res, next){
     let idParam = req.params.id;
-    let product = Product.remove({_id: idParam});
-        product.exec(function(err){
+    Product.findOne({_id: idParam}, function(err, data){
+        uploader.imageRemove(data.photo_id);
+        Product.remove({_id: idParam})
+        .exec(function(err){
             console.log(err);
         });
+        
+    })
+    
     res.redirect('/admin/products');  
 }
 editProduct = function(req, res, next){

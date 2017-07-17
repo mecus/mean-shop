@@ -14,13 +14,13 @@ block content
                     thead.thead-default
                         tr
                             th
-                                h4 Categories for #{category.name}
+                                h4 Categories => #{category.name}
                             //- th Store Code
                             //- th 
                             th(colSpan="1")
                             th
                                 span.badge.badge-default.badge-pill
-                                    i.fa.fa-plus(aria-hidden='true' onclick="openDeptForm()" id="true")
+                                    i.fa.fa-plus(aria-hidden='true' onclick="openForm()" id="true")
 
                     tbody
                         each catdata in catData
@@ -37,3 +37,4 @@ block content
                                     span.badge.badge-default.badge-pill
                                         a(href="" onclick="deleteSubCategory(this)", data-id=catdata.id)
                                             i.fa.fa-times(aria-hidden='true')
+            button.btn.btn-primary(onclick='backward()')  Back

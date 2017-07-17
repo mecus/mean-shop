@@ -4,16 +4,17 @@ var fs              = require('fs');
 var path            = require('path');
 
 cloudinary.config({ 
-  cloud_name: 'dxxw6jfih', 
-  api_key: '713573881711642', 
-  api_secret: 'hfll2wcsfo2SXltiO2LiRxZ5Y0k' 
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY, 
+  api_secret: process.env.API_SECRET 
 });
 
 imageUpload = function(req, res, next){
     var id = req.body.id;
     var url = req.body.data;
+    var public_id = req.body.public_id;
 
-    Product.update({_id: id}, {$set: {imageUrl: url}}, {upsert: true}, function(err){
+    Product.update({_id: id}, {$set: {imageUrl: url, photo_id: public_id}}, {upsert: true}, function(err){
       if(err){return next(err)}
       console.log("Image updated");
       res.redirect('/admin/products');
@@ -23,5 +24,10 @@ imageUpload = function(req, res, next){
     //   function(result){console.log(result)}, {public_id: "shop_image"})
 
 }
+imageRemove = function(image){
+  cloudinary.uploader.destroy(image, {invalidate: true}, function(err, result){
+    console.log(result);
+  });
+}
 
-module.exports = imageUpload;
+module.exports = {imageUpload, imageRemove};

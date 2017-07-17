@@ -3,6 +3,7 @@
 # compiled output
 /public
 /tmp
+/Trash
 # Ignore all js files
 /src/app/**/*.js
 /src/environments

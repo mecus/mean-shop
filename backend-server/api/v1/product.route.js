@@ -14,7 +14,7 @@ getProducts = function(req, res, next){
             }
         });
     })
-    
+
 
     // if(req.headers['content-type'] !== undefined){
     //     res.status(415).json({"Error": "Content-Type is require"});
@@ -27,7 +27,7 @@ getProducts = function(req, res, next){
     //             res.json(products);
     //         }
     //     });
-    // } 
+    // }
 }
 //Come back later for the request option
 let option = {
@@ -35,15 +35,25 @@ let option = {
     'content-type': 'application/json',
     'connection': 'keep-alive',
     'host': 'mysite.com',
-    'accept': '*/*' 
+    'accept': '*/*'
 }
+getProductsOnly = function(req, res, next){
+    Product.find({publish: true}, function(err, products){
+        if(err){
+            res.statusCode = 406;
+            res.json({"Error": "Content not available"});
+        }else{
+            res.json(products);
+        }
+    });
+  }
 
 getProduct = function(req, res, next){
     let idParam = req.params.id;
     Product.findOne({_id: idParam}).exec(function(err, product){
         if(err){
             res.status(404).json({"Error": "The Document can not be found"});
-            
+
         }else{
             res.json(product);
         }
@@ -71,4 +81,4 @@ updateProduct = function(req, res, next){
     })
 }
 
-module.exports = {getProducts, getProduct, postProduct, removeProduct, updateProduct};
+module.exports = {getProducts, getProductsOnly, getProduct, postProduct, removeProduct, updateProduct};

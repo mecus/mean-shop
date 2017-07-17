@@ -21,7 +21,6 @@ var dbConnect       = require('./configurations/mongodb-connect');
 var authConfig      = require('./configurations/passportAuthentication');
 
 //File imports
-var angularController = require('./controllers/angular-frontend');
 var productsController= require('./controllers/products');
 var adminIndex      = require('./controllers/admin-index');
 var uploader        = require('./controllers/uploader');
@@ -31,6 +30,7 @@ var orders          = require('./controllers/orders');
 var customers       = require('./controllers/customers');
 var users    = require('./controllers/users');
 var subCat      = require('./controllers/sub-category');
+var advert          = require('./controllers/advert');
 
 //Api imports
 var storeDataApi    = require('./api/v1/store-back-end');
@@ -52,11 +52,11 @@ dbConnect(mongoose);
 app.set("port", process.env.PORT || 3000);
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, "../src")));//Need to be changed to public
+app.use(express.static(path.join(__dirname, "./assets")));//Need to be changed to public
 
 //Implementing Body-Parser
 //Set Cors Options Later
-// app.use(cors());
+app.use(cors());
 // app.use(loger('combined', {stream: logStream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,8 +65,8 @@ app.use(uploadForm.array());
 app.use(cookieParser());
 
 //Express-session for development only
-app.use(session({ 
-    secret: process.env.SECRET_KEY, 
+app.use(session({
+    secret: process.env.SECRET_KEY,
     // cookie: {maxAge: 60000},
     resave: false,
     saveUninitialized: false,
@@ -83,7 +83,7 @@ app.use(flash());
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
 //   console.log('This is Log user:' +req.user);
-     console.log("Authenticated: "+req.isAuthenticated());
+    //  console.log("Authenticated: "+req.isAuthenticated());
   next();
 });
 app.use(function(req, res, next){
@@ -105,13 +105,15 @@ app.post('/admin/registration/new', users.registered);
 app.get('/admin/login', users.logIn);
 app.post('/admin/login', users.loggedIn);
 app.get('/admin/logout', users.logOut);
-// app.post('/admin/login', passport.authenticate('local', 
+// app.post('/admin/login', passport.authenticate('local',
 //   { successRedirect: '/admin/dashboard', failureRedirect: '/admin/login', failureFlash: true })
 // );
 
 //API ROUTES
-api.get('/v1/storedata', storeDataApi);
+api.get('/v1/storedata', storeDataApi.getStoreData);
+api.get('/v1/storeadvert', storeDataApi.getStoreAd);
 api.get('/v1/products', productApi.getProducts);
+api.get('/v1/productsonly', productApi.getProductsOnly);
 api.get('/v1/products/:id', productApi.getProduct);
 api.get('/v1/category/:id', categoryApi);
 api.get('/v1/departments', departmentApi);
@@ -127,13 +129,17 @@ app.post('/admin/product/update/:id', productsController.updateProduct);
 app.delete('/admin/products/:id', productsController.removeProduct);
 app.get('/admin/product/:id', productsController.viewProduct);
 
-app.post('/admin/upload', uploader);
+app.post('/admin/upload', uploader.imageUpload);
 
 app.get('/admin/store', department.getDept);
 app.post('/admin/dept', department.postDept);
 app.delete('/admin/dept/:id', department.deleteDept);
 app.get('/admin/dept/:id', department.editDept);
 app.post('/admin/store/:id', department.updateDept);
+app.get('/admin/advert/:id', advert.getAd);
+app.post('/admin/advert', advert.saveAd);
+app.delete('/admin/ad/:id', advert.removeAd);
+
 
 app.post('/admin/cat', category.postCategory);
 app.get('/admin/category/:id', category.getCategory);
@@ -148,8 +154,7 @@ app.get('/admin/orders', orders.getOrders);
 app.get('/admin/customers', customers.getCustomers);
 
 //Handling all incoming and outgoing request and responds
-//going to frontend (Angular)
-app.get('/*', angularController);
+app.get('/*', users.isAuthenticated, adminIndex);
 
 
 //Error Handler, Need to set the environment
