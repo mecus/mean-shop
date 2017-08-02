@@ -27,6 +27,7 @@ saveAd = function(req, res, next){
 }
 removeAd = function(req, res, next){
     var queryId = req.params.id;
+    
     Advert.findOne({_id:queryId}, function(err, data){
         uploader.imageRemove(data.photo_id);
         Advert.remove({_id:data._id}).exec(function(err){
@@ -34,8 +35,31 @@ removeAd = function(req, res, next){
         })
     })
    
-    res.redirect('/admin/store');
+    res.redirect('/admin/store/');
+}
+//Creating general adverts
+getGAd = function(req, res, next){
+    Advert.find({}, function(err, advert){
+        if(err){ return next(err);}
+        else{
+            res.render('advertise', {title: "Store Advertisement", advert});
+        }
+    })
+}
+saveGAd = function(req, res, next){
+    var advert = new Advert();
+    advert.title = req.body.title,
+    advert.photo_id = req.body.photo_id,
+    advert.photo_url = req.body.photo_url,
+    advert.tag = req.body.tag,
+    advert.department_id = null
+
+    advert.save(function(err){
+        if(err){ return next(err);}
+        else{
+            res.redirect('/admin/advertise/');
+        }
+    })
 }
 
-
-module.exports = {getAd, saveAd, removeAd}
+module.exports = {getAd, saveAd, removeAd, getGAd, saveGAd }

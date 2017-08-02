@@ -15,6 +15,7 @@ var cloudinary      = require('cloudinary');
 var expressValidator = require('express-validator');
 var passport        = require('passport');
 var mongoStore      = require('connect-mongo')(session);
+var braintree       = require('braintree');
 
 //Require Configurations
 var dbConnect       = require('./configurations/mongodb-connect');
@@ -31,17 +32,21 @@ var customers       = require('./controllers/customers');
 var users    = require('./controllers/users');
 var subCat      = require('./controllers/sub-category');
 var advert          = require('./controllers/advert');
+var youtube         = require('./controllers/youtube');
 
 //Api imports
 var storeDataApi    = require('./api/v1/store-back-end');
 var productApi      = require('./api/v1/product.route');
 var categoryApi     = require('./api/v1/category.route');
 var departmentApi      = require('./api/v1/department.route');
+var youtubeApi      = require('./api/v1/youtube.route');
+var paymentApi      = require('./api/payment/checkout');
+var accountApi      = require('./api/v1/account.route');
 
 require('dotenv').config({path: '.env'});
 
-let app     = express();
-let api     = express();
+var app     = express();
+var api     = express();
 var admin   = express();
 
 // let logStream = fs.createWriteStream(path.join(__dirname, '../../logger.log'),{flags: 'a'});
@@ -113,10 +118,15 @@ app.get('/admin/logout', users.logOut);
 api.get('/v1/storedata', storeDataApi.getStoreData);
 api.get('/v1/storeadvert', storeDataApi.getStoreAd);
 api.get('/v1/products', productApi.getProducts);
-api.get('/v1/productsonly', productApi.getProductsOnly);
+api.get('/v1/products/query', productApi.getQueryProducts);
 api.get('/v1/products/:id', productApi.getProduct);
 api.get('/v1/category/:id', categoryApi);
 api.get('/v1/departments', departmentApi);
+api.get('/v1/youtube', youtubeApi);
+api.get('/payment/checkout', paymentApi.getCheckout);
+api.get('/v1/account/:id', accountApi.getAccount);
+api.post('/v1/account', accountApi.postAccount);
+api.patch('/v1/account/edit/:id', accountApi.updateAccount);
 app.use('/api', api);
 
 //Express Inhouse route
@@ -136,10 +146,20 @@ app.post('/admin/dept', department.postDept);
 app.delete('/admin/dept/:id', department.deleteDept);
 app.get('/admin/dept/:id', department.editDept);
 app.post('/admin/store/:id', department.updateDept);
+
+// Advert Section
 app.get('/admin/advert/:id', advert.getAd);
 app.post('/admin/advert', advert.saveAd);
 app.delete('/admin/ad/:id', advert.removeAd);
 
+// General Advert
+app.get('/admin/advertise', advert.getGAd);
+app.post('/admin/advertise', advert.saveGAd);
+
+//Youtube Section
+app.get('/admin/youtube', youtube.getYoutube);
+app.post('/admin/youtube', youtube.saveVideo);
+app.get('/admin/youtube/del/:id', youtube.deleteVideo);
 
 app.post('/admin/cat', category.postCategory);
 app.get('/admin/category/:id', category.getCategory);

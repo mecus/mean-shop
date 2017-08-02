@@ -2,11 +2,12 @@ var Product         = require('../models/product.model');
 var cloudinary      = require('cloudinary');
 var fs              = require('fs');
 var path            = require('path');
+require('dotenv').config({path: '.env'});
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY, 
-  api_secret: process.env.API_SECRET 
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
 });
 
 imageUpload = function(req, res, next){

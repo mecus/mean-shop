@@ -37,15 +37,24 @@ let option = {
     'host': 'mysite.com',
     'accept': '*/*'
 }
-getProductsOnly = function(req, res, next){
-    Product.find({publish: true}, function(err, products){
-        if(err){
-            res.statusCode = 406;
-            res.json({"Error": "Content not available"});
-        }else{
+getQueryProducts = function(req, res, next){
+    if(req.query.name){
+        var str = new RegExp(req.query.name, 'i');
+        
+        // var name = str.charAt(0).toUpperCase() + str.slice(1);
+        Product.find({publish: true, name: str}, function(err, products){
+            if(err){
+                res.statusCode = 406;
+                res.json({"Error": "Content not available"});
+            }else{
+                res.json(products);
+            }
+        });
+    }else{
+        Product.find({publish: true}, function(err, products){
             res.json(products);
-        }
-    });
+        })
+    }
   }
 
 getProduct = function(req, res, next){
@@ -81,4 +90,4 @@ updateProduct = function(req, res, next){
     })
 }
 
-module.exports = {getProducts, getProductsOnly, getProduct, postProduct, removeProduct, updateProduct};
+module.exports = {getProducts, getQueryProducts, getProduct, postProduct, removeProduct, updateProduct};
