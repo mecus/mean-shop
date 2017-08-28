@@ -1,0 +1,40 @@
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top.main-nav
+	button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+		span.navbar-toggler-icon
+	a.navbar-brand(href='/admin/dashboard')
+		i.fa.fa-home(aria-hidden="true") 
+			span AdminPanel
+	#navbarSupportedContent.collapse.navbar-collapse
+		ul.navbar-nav.mr-auto
+			//- li.nav-item.active
+			//- 	a.nav-link(href='/')
+			//- 		| FrontEnd 
+			//- 		span.sr-only (current)
+			//- li.nav-item
+			//- 	a.nav-link(href='/admin/product/new') Add Product
+			//- li.nav-item
+			//- 	a.nav-link(href='/admin/products') Products
+			li.nav-item
+				a.nav-link(href='/admin/store') Product Manager
+			li.nav-item
+				a.nav-link(href='/admin/advertise') Store Adverts
+			li.nav-item
+				a.nav-link(href='/admin/youtube') Youtube
+			li.nav-item
+				a.nav-link(href='/admin/orders') Orders
+			li.nav-item
+				a.nav-link(href='/admin/customers') Customers
+			li.nav-item
+				a.nav-link(href='#') Contacts
+		form.form-inline.my-2.my-lg-0
+			- if(currentUser)
+				li.nav-item(style="list-style:none")
+					i.fa.fa-user(aria-hidden="true", style="font-size:20px; padding-right:5px;" ) 
+						span #{currentUser.username}
+			li.nav-item(style="list-style:none;")
+				- if(!currentUser)
+					a.nav-link(href="/admin/login", style="color:#ffc900 !important;") Login
+				-else
+					a.nav-link(href="/admin/logout", style="color:#ffc900 !important;") Log Out
+			//- input.form-control.mr-sm-2(type='text', placeholder='Search')
+			//- button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

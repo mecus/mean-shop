@@ -1,0 +1,42 @@
+extends layout
+block content
+	.w3-container.product-list.jumbotron(style="padding:30px; width: 700px; margin:0 auto; margin-top: 70px;")
+		a( href="/admin/product/edit/"+id) 
+			button.btn.btn-default Edit
+		.row
+			.col-8
+				.form-group.row
+					.col-sm-6
+						h5 Product Name:
+					.col-sm-6
+						h5 #{name}
+				.form-group.row
+					.col-sm-6
+						h5 Product Code:
+					.col-sm-6
+						h5 #{code}
+				.form-group.row
+					.col-sm-6
+						h5 Price:
+					.col-sm-6
+						h5 #{price}
+				.form-group.row
+					.col-sm-6
+						h5 Publish:
+					.col-sm-6
+						h5 #{publish}
+				.form-group.row
+					.col-sm-6
+						h5 Categories:
+					.col-sm-6
+						h5 #{category}
+			.col-4
+				
+				imageUp-wrapper.form-group
+					img.image-url(src=imageUrl, style="width:200px; height: 200px")
+					h5.upload-image-text Upload Image
+				input(id="loadimage", type="file")
+				br
+				a(href="/admin/products") 
+					button.btn.btn-success Back
+				

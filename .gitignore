@@ -7,6 +7,7 @@
 # Ignore all js files
 /src/app/**/*.js
 /src/environments
+/functions/node_modules
 
 # dependencies
 /node_modules

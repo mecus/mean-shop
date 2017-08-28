@@ -1,5 +1,5 @@
 var express = require ('express');
-var start_app     = require ('./backend-server/app');
+var start_app     = require ('./functions/index');
 var http    = require ('http');
 
 
@@ -16,5 +16,16 @@ var success = function(){
 var server = http.createServer(start_app);
 
 server.listen(start_app.get("port"));
-server.on('error', function(){console.log('something bad happened')});
+server.on('error', function(err){
+    console.error(`
+    Handled Error: True
+    Stack: ${err.stack}
+    `);
+});
+server.on('uncaughtException', (err)=>{
+    console.log(`
+    This is Unhandled error: True
+    Error: ${err}
+    `)
+})
 server.on('listening', success );

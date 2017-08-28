@@ -1,0 +1,58 @@
+extends admin-layout
+block content
+	.content-wrapper
+		.container
+			//- .w3-card-4-9
+			//- 	- if (messages.dbSuccess)
+			//- 			.flash-msg
+			//- 				span= messages.dbSuccess
+			.container-wrapper
+				.row
+					.col.col-lg-3
+						.jumbotron
+							h2.display-6 Products
+
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/products', role='button')
+									span See #{num} Items
+
+					.col.col-lg-3
+						.jumbotron
+							h2.display-6 Manager
+
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/store', role='button') Manage Store
+					.col.col-lg-3
+						.jumbotron
+							h2.display-6 Orders
+
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='/admin/orders', role='button') View Orders
+					.col.col-lg-3
+						.jumbotron
+							h2.display-6 Customers
+
+							hr.my-4
+							p
+								| It uses utility classes for typography and spacing to space content out within the larger container.
+							p.lead
+								a.btn.btn-primary.btn-lg(href='#', role='button') Our Customers
+				//- .row
+				//- 	.col.col-lg-3
+				//- 		.jumbotron
+				//- 			h2.display-6 Adverts
+
+				//- 			hr.my-4
+				//- 			p
+				//- 				| It uses utility classes for typography and spacing to space content out within the larger container.
+				//- 			p.lead
+				//- 				a.btn.btn-primary.btn-lg(role='button') Adverts

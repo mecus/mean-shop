@@ -8,9 +8,8 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
-        ".gitignore": true,
+        ".gitignore": false,
         "**/.DS_Store": true,
-        "public": true,
         "src/express-assets/styles/*.css": true
     }
 

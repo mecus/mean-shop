@@ -1,0 +1,27 @@
+extends layout
+block content
+	.w3-container.jumbotron(style="margin-top:50px;")
+		.w3-card-6
+			table.table.table-striped
+				thead.thead-default
+					tr
+						th Order_Id
+						th Customer Name
+						th Email
+						th Amount
+						th Customer No
+						th Phone
+						th Delivery
+						th(colSpan="2")
+				tbody
+					each order in orders
+						tr
+							td= order.order_no
+							td= order.customer_name
+							td= order.email
+							td= order.amount
+							td= order.customer_no
+							td= order.telephone
+							td= order.delivery_method
+							td x
+						

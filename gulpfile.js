@@ -9,15 +9,15 @@ let ts = require('gulp-typescript');
 
 //Compiling Sass
 gulp.task('node-sass', function(){
-    return gulp.src('backend-server/assets/styles/*.scss')
+    return gulp.src('functions/assets/styles/*.scss')
         .pipe(concat('main.css'))
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('backend-server/assets/styles'));
+        .pipe(gulp.dest('functions/assets/styles'));
 })
 
 //Watching Sass for changes
 gulp.task('sass:watch', function(){
-    gulp.watch(['backend-server/assets/styles/*.scss'], ['node-sass']);
+    gulp.watch(['functions/assets/styles/*.scss'], ['node-sass']);
 });
 
 
