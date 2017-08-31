@@ -1,4 +1,4 @@
-const functions       = require('firebase-functions');
+// const functions       = require('firebase-functions');
 const express         = require('express');
 const bodyParser      = require('body-parser');
 const expressGraphql  = require('express-graphql');
@@ -110,7 +110,7 @@ app.use(function(req, res, next){
   if (!req.user &&
       req.path !== "/admin/login" &&
       req.path !== "/admin/registration/new"){
-    req.session.returnTo = req.path;
+     req.session.returnTo = req.path;
   } else if (req.user &&
       req.path == "/admin/dashboard") {
       req.session.returnTo = req.path;
@@ -219,4 +219,4 @@ app.get('/', userAuthentication.isAuthenticated, adminIndex);
 
 
 module.exports = app;
-// module.exports.server = functions.https.onRequest(app);
+// exports.app = functions.https.onRequest(app);
