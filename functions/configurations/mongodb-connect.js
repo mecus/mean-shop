@@ -1,10 +1,8 @@
 const winston         = require('winston');
 
 var dbConnect = function(mongoose){
-    let PATH = process.env.MONGODB_URL;
+    let PATH = process.env.MONGODB_URI;
     let options = {
-        user: process.env.DB_USER,
-        pass: process.env.DB_PASSWORD,
         server: {
             socketOptions: {
                 socketTimeoutMS: 0,
