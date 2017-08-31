@@ -1,4 +1,3 @@
-// const functions       = require('firebase-functions');
 const express         = require('express');
 const bodyParser      = require('body-parser');
 const expressGraphql  = require('express-graphql');
@@ -105,18 +104,19 @@ app.use(function(req, res, next){
     //  console.log("Authenticated: "+req.isAuthenticated());
   next();
 });
-app.use(function(req, res, next){
-  // After successful login, redirect back to the intended page
-  if (!req.user &&
-      req.path !== "/admin/login" &&
-      req.path !== "/admin/registration/new"){
-     req.session.returnTo = req.path;
-  } else if (req.user &&
-      req.path == "/admin/dashboard") {
-      req.session.returnTo = req.path;
-  }
-  next();
-});
+// app.use(function(req, res, next){
+//   // After successful login, redirect back to the intended page
+//   if (!req.user &&
+//       req.path !== "/admin/login" &&
+//       req.path !== "/admin/registration/new"){
+//           console.log(`Req: ${req.path}`);
+//      req.session.returnTo = req.path;
+//   } else if (req.user &&
+//       req.path == "/admin/dashboard") {
+//       req.session.returnTo = req.path;
+//   }
+//   next();
+// });
 
 //User Authentication and Registration
 app.get('/admin/registration', userAuthentication.registration);
@@ -219,4 +219,3 @@ app.get('/', userAuthentication.isAuthenticated, adminIndex);
 
 
 module.exports = app;
-// exports.app = functions.https.onRequest(app);

@@ -6,7 +6,7 @@ var http    = require ('http');
 var success = function(){
     // console.log(process.env);
     console.log(`
-        SERVER: Listening on port: ${start_app.get("port")}}...
+        SERVER: Listening on port: ${start_app.get("port")}...
         ENVIRONMENT: ${process.env.NODE_ENV}
     `);
     return;
