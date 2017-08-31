@@ -10,6 +10,9 @@
     "MongoDB",
     "Express"
   ],
+  "engines": {
+    "node": "6.11.1"
+  },
   "author": "Austin Oseh",
   "license": "MIT",
   "dependencies": {
