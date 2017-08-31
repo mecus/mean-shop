@@ -80,15 +80,15 @@ app.use(uploadForm.array());
 app.use(cookieParser());
 
 //Express-session for development only
-if(process.env.NODE_ENV == "development"){
+if(process.env.NODE_ENV == "development" || process.env.NODE_ENV == "production"){
     app.use(session({
         secret: process.env.SECRET_KEY,
-        // cookie: {maxAge: 60000},
+        cookie: {maxAge: 60000},
         resave: false,
         saveUninitialized: false,
         // storing session in the mongo database
         store: new mongoStore({
-            url: process.env.MONGO_SESSION_URI,
+            url: process.env.MONGODB_URI,
             autoReconnect: true
         })
     }));
