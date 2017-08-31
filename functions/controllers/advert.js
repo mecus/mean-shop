@@ -27,15 +27,14 @@ saveAd = function(req, res, next){
 }
 removeAd = function(req, res, next){
     var queryId = req.params.id;
-    
-    Advert.findOne({_id:queryId}, function(err, data){
+    Advert.findOne({_id: queryId}, function(err, data){
         uploader.imageRemove(data.photo_id);
         Advert.remove({_id:data._id}).exec(function(err){
             if(err){return next(err);}
         })
     })
    
-    res.redirect('/admin/store/');
+    res.redirect('/admin/advertise/');
 }
 //Creating general adverts
 getGAd = function(req, res, next){

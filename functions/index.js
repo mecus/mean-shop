@@ -78,12 +78,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(uploadForm.array());
 app.use(cookieParser());
-
+app.disable('x-powered-by');
 //Express-session for development only
 if(process.env.NODE_ENV == "development" || process.env.NODE_ENV == "production"){
     app.use(session({
         secret: process.env.SECRET_KEY,
-        cookie: {maxAge: 60000},
+        cookie: {maxAge: 300000 * 12},
         resave: false,
         saveUninitialized: false,
         // storing session in the mongo database
@@ -217,5 +217,9 @@ app.get('/admin/customers', customers.getCustomers);
 app.get('/', userAuthentication.isAuthenticated, adminIndex);
 // users.isAuthenticated
 
+//404 page not found
+app.use((req, res)=>{
+    res.render('404.pug', {title: "Page Not Found"});
+});
 
 module.exports = app;
