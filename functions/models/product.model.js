@@ -8,8 +8,13 @@ var productSchema = new Schema({
     name: String,
     code: String,
     price: SchemaTypes.Double,
+    old_price: SchemaTypes.Double,
     imageUrl: String,
     photo_id: String,
+    offer: String,
+    brand: String,
+    sponsored: String,
+    recommend: String,
     category: {
         type: String
     },

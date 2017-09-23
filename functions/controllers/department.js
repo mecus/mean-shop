@@ -28,7 +28,8 @@ postDept = function(req, res){
     var dept = new Department();
     dept.name = req.body.name,
     dept.code = req.body.code,
-    dept.selected = false
+    dept.selected = false,
+    dept.types_$ = req.body.types_$
 
     dept.save(function(err){
         if(err){
@@ -56,7 +57,8 @@ updateDept = function(req, res, next){
     var updateDep = {
         name: req.body.name,
         code: req.body.code,
-        selected: false
+        selected: false,
+        types_$: req.body.types_$
     }
     Department.update({_id:queryId}, updateDep, function(err){
         if(err){return next(err);}

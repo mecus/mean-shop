@@ -7,7 +7,8 @@ var deptModel = new Schema({
         type: String
     },
     code: String,
-    selected: Boolean
+    selected: Boolean,
+    types_$: String
 })
 
 var Department = mongoose.model('Department', deptModel);

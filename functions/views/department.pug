@@ -24,6 +24,7 @@ block content
 				.form-input.form-group
 					input.form-control(name='name', required='', type='text', placeholder='Department Name')
 					input.form-control(name='code', type='text', placeholder='Department Code')
+					input.form-control(name='types_$', type='text', placeholder='Department Type')
 				.save-btn
 					button.btn.btn-primary(type='submit') Save
 
@@ -78,6 +79,7 @@ block content
 					.form-input.form-group
 						input.form-control(name='name', value=output.oneDept.name, required='', type='text', placeholder='Department Name')
 						input.form-control(name='code', value=output.oneDept.code, type='text', placeholder='Department Code')
+						input.form-control(name='types_$', value=output.oneDept.types_$, type='text', placeholder='Department Type')
 					.save-btn
 						button.btn.btn-primary(type='submit') Update
 				button.btn.btn-primary(onclick='backward()')  Back

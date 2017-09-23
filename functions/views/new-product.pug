@@ -19,10 +19,15 @@ block content
 				.col-sm-9
 					input#prodCode.form-control(name="code", type='text', placeholder='product code')
 			.form-group.row
-				label.col-sm-3.col-form-label(for='prodPrice') Price
+				label.col-sm-3.col-form-label(for='prodPrice') Now Price
 				.col-sm-9
-					input#prodPrice.form-control(name="price", type='text', placeholder='price')
-			
+					input#prodPrice.form-control(name="price", type='text', placeholder='now price')
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='oldPrice') Old Price
+				.col-sm-9
+					input#oldPrice.form-control(name="old_price", type='text', placeholder='optional old price')
+
 			input#prodimageUrl.form-control(hidden="", name="imageUrl", type='text', value="www.imageurl.com", placeholder='image link')
 			.form-group.row
 				label.col-sm-3.col-form-label(for='prodCategory') Category
@@ -38,6 +43,33 @@ block content
 				.col-sm-9
 					input#prodStock.form-control(name="stock", type='number', placeholder='stock')
 			
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='brand') Brand Name
+				.col-sm-9
+					input#brand.form-control(name="brand", type='text', placeholder='brand')
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='offer') Offer
+				.col-sm-9
+					select.form-control(name="offer")
+						option(value="no") no
+						option(value="yes") yes
+					//- input#offer.form-control(name="offer", type='text', placeholder='offer')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='sponsored') Sponsored
+				.col-sm-9
+					select#sponsored.form-control(name="sponsored")
+						option(value="no") no
+						option(value="yes") yes
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='recommend') Recommend
+				.col-sm-9
+					select#recommend.form-control(name="recommend")
+						option(value="no") no
+						option(value="yes") yes
+
 			.form-group
 				h6(style="color:slategray") Descriptions
 				.form-group.row

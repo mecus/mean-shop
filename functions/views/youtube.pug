@@ -41,10 +41,10 @@ block content
                                             small
                                                 span(style="margin-left: 20px; color: blue;")
                                                     = vid.tag
-                                                    //- = ad.id
+                                                    //- = vid.id
                                         
                                         small
-                                            a.btn.btn-primary(href="/admin/youtube/del/"+vid.id)
+                                            a.btn.btn-primary(onclick="deleteYoutube(this)" data-id=vid.id)
                                                 i.fa.fa-times(aria-hidden='true', id="true")
 
                                     p.mb-1

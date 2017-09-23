@@ -18,6 +18,11 @@ block content
 				label.col-sm-3.col-form-label(for='prodPrice') Price
 				.col-sm-9
 					input#prodPrice.form-control(name="price", value=product.price, type='text', placeholder='price')
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='oldPrice') Old Price
+				.col-sm-9
+					input#oldPrice.form-control(name="old_price", value=product.old_price, type='text', placeholder='old price')
 			
 			input#prodimageUrl.form-control(hidden="", name="imageUrl", value=product.imageUrl, type='text', placeholder='image link')
 			.form-group.row
@@ -41,6 +46,38 @@ block content
 				label.col-sm-3.col-form-label(for='prodStock') Stock Qty
 				.col-sm-9
 					input#prodStock.form-control(name="stock", value=product.stock type='number', placeholder='stock')
+
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='brand') Brand Name
+				.col-sm-9
+					input#brand.form-control(name="brand", value=product.brand type='text', placeholder='brand')
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='offer') Offer
+				.col-sm-9
+					select.form-control(name="offer")
+						option(value=product.offer) #{product.offer}
+						option(value="no") no
+						option(value="yes") yes
+					//- input#offer.form-control(name="offer", type='text', placeholder='offer')
+			.form-group.row
+				label.col-sm-3.col-form-label(for='sponsored') Sponsored
+				.col-sm-9
+					select#sponsored.form-control(name="sponsored")
+						option(value=product.sponsored) #{product.sponsored}
+						option(value="no") no
+						option(value="yes") yes
+
+			.form-group.row
+				label.col-sm-3.col-form-label(for='recommend') Recommend
+				.col-sm-9
+					select#recommend.form-control(name="recommend")
+						option(value=product.recommend) #{product.recommend}
+						option(value="no") no
+						option(value="yes") yes
+
+
 
 			.form-group
 				h6(style="color:slategray") Descriptions

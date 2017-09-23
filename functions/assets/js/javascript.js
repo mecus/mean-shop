@@ -84,7 +84,23 @@ function deleteAdvert(ad){
             type: 'DELETE'
         }).done(function(res){
           // return;
-            window.location.replace('/admin/store');
+            window.location.replace('/admin/advertise');
+        })
+        return false;
+    }
+}
+function deleteYoutube(vid){
+    var $video = vid.getAttribute('data-id');
+    // alert($video);
+    var url = "/admin/youtube/del/";
+    var confirmation = confirm('Are you sure');
+    if(confirmation){
+        $.ajax({
+            url: url+$video,
+            type: 'DELETE'
+        }).done(function(res){
+          // return;
+            window.location.replace('/admin/youtube');
         })
         return false;
     }

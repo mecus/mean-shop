@@ -20,6 +20,7 @@ saveVideo = function(req, res, nex){
     })
 }
 deleteVideo = function(req, res, next){
+    // console.log(req.params.id);
     Youtube.remove({_id:req.params.id}).exec(function(err){
         if(err){return next(err);}
         res.redirect('/admin/youtube');

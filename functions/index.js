@@ -199,7 +199,7 @@ app.post('/admin/advertise', advert.saveGAd);
 //Youtube Section
 app.get('/admin/youtube', youtube.getYoutube);
 app.post('/admin/youtube', youtube.saveVideo);
-app.get('/admin/youtube/del/:id', youtube.deleteVideo);
+app.delete('/admin/youtube/del/:id', youtube.deleteVideo);
 
 app.post('/admin/cat', category.postCategory);
 app.get('/admin/category/:id', category.getCategory);

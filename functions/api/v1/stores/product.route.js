@@ -51,9 +51,10 @@ getQueryProducts = function(req, res, next){
             }
         });
     }else{
-        Product.find({publish: true}, function(err, products){
-            res.json(products);
-        })
+        res.json(null);
+        // Product.find({publish: true}, function(err, products){
+        //     res.json(products);
+        // })
     }
   }
 

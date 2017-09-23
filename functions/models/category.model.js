@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 var catModel = new Schema({
     name: String,
-    department_id: String
+    department_id: String,
+    types_$: String
 })
 
 var Category = mongoose.model('Category', catModel);

@@ -41,17 +41,22 @@ showProducts = function(req, res, next){
 postProduct = function(req, res, next){
     // console.log(req.body);
     var prodPrice = Number(req.body.price).toFixed(2);
+    var prodOldPrice = Number(req.body.old_price).toFixed(2);
     var product = new Product();
     product.name = req.body.name;
     product.code = req.body.code;
     product.price = prodPrice;
+    product.old_price = prodOldPrice;
     product.imageUrl = req.body.imageUrl;
     product.category = req.body.category;
     product.department_id = req.body.department_id;
     product.category_id = req.body.category_id;
     product.subcategory_id = req.body.subcategory_id;
     product.stock = req.body.stock;
-
+    product.brand = req.body.brand;
+    product.offer = req.body.offer;
+    product.sponsored = req.body.sponsored;
+    product.recommend = req.body.recommend;
     product.description.detail = req.body.detail;
     product.description.size = req.body.size;
     product.description.origin = req.body.origin;
@@ -91,7 +96,7 @@ editProduct = function(req, res, next){
     var id = req.params.id;
     Product.findOne({_id: id}).exec(function(err, product){
         Category.find({}, function(err, category){
-            res.render('edit', {product, category});
+            res.render('edit-product', {product, category});
         })
         // console.log(data);
     })
@@ -102,17 +107,22 @@ updateProduct = function(req, res, next){
     // console.log(req.body);
     // console.log(queryId);
     var prodPrice = Number(req.body.price).toFixed(2);
+    var prodOldPrice = Number(req.body.old_price).toFixed(2);
     let upProduct = {
         name: req.body.name,
         code: req.body.code,
         price: prodPrice,
+        old_price: prodOldPrice,
         imageUrl: req.body.imageUrl,
         category: req.body.category,
         department_id: req.body.department_id,
         category_id: req.body.category_id,
         subcategory_id: req.body.subcategory_id,
         stock: req.body.stock,
-
+        brand: req.body.brand,
+        offer: req.body.offer,
+        sponsored: req.body.sponsored,
+        recommend: req.body.recommend,
         description: {
             detail: req.body.detail,
             size: req.body.size,
